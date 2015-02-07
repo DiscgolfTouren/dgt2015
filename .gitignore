@@ -1,0 +1,17 @@
+obj
+bin
+_ReSharper.*
+*.csproj.user
+*.resharper.user
+*.resharper
+*.suo
+*.cache
+*.sln.cache
+*.user
+*~
+*.swp
+*.resharper.user
+*.rptproj.user
+*.db
+*.orig
+PrescriptionManager/packages/*/*
