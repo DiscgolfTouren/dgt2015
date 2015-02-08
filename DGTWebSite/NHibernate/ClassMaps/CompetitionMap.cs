@@ -1,7 +1,7 @@
-﻿using DGTWebSite.Entity;
+using DGTWebSite.Entity;
 using FluentNHibernate.Mapping;
 
-namespace DGTWebSite.ClassMaps
+namespace DGTWebSite.NHibernate.ClassMaps
 {
     public class CompetitionMap : ClassMap<Competition>
     {

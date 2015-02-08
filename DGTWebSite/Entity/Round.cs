@@ -7,6 +7,6 @@ namespace DGTWebSite.Entity
         public Competition Competition { get; set; }
         public Courseconfiguration Courseconfig { get; set; }
         public int RoundNumber { get; set; }
-        public IDictionary<Player, int> PlayerResults { get; set; }
+        public IList<PlayerResult> PlayerResults { get; set; }
     }
 }

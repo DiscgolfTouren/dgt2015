@@ -167,12 +167,6 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
-    <Compile Include="ClassMaps\CompetitionMap.cs" />
-    <Compile Include="ClassMaps\CourseconfigurationMap.cs" />
-    <Compile Include="ClassMaps\HoleMap.cs" />
-    <Compile Include="ClassMaps\PlayerMap.cs" />
-    <Compile Include="ClassMaps\RoundMap.cs" />
-    <Compile Include="ClassMaps\TourMap.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -180,8 +174,10 @@
     <Compile Include="Entity\Competition.cs" />
     <Compile Include="Entity\Courseconfiguration.cs" />
     <Compile Include="Entity\Hole.cs" />
+    <Compile Include="Entity\HoleScore.cs" />
     <Compile Include="Entity\Player.cs" />
     <Compile Include="Entity\PlayerCompetitionStatus.cs" />
+    <Compile Include="Entity\PlayerResult.cs" />
     <Compile Include="Entity\Round.cs" />
     <Compile Include="Entity\Tour.cs" />
     <Compile Include="Global.asax.cs">
@@ -190,8 +186,15 @@
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="NHibernate\ClassMaps\CompetitionMap.cs" />
+    <Compile Include="NHibernate\ClassMaps\CourseconfigurationMap.cs" />
+    <Compile Include="NHibernate\ClassMaps\HoleMap.cs" />
+    <Compile Include="NHibernate\ClassMaps\PlayerMap.cs" />
+    <Compile Include="NHibernate\ClassMaps\RoundMap.cs" />
+    <Compile Include="NHibernate\ClassMaps\TourMap.cs" />
     <Compile Include="Models\PBModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repository\IRepository.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
