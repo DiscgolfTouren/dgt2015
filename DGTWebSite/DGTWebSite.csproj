@@ -39,6 +39,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="FluentNHibernate">
+      <HintPath>..\packages\FluentNHibernate.2.0.1.0\lib\net40\FluentNHibernate.dll</HintPath>
+    </Reference>
     <Reference Include="Iesi.Collections">
       <HintPath>..\packages\Iesi.Collections.4.0.0.4000\lib\net40\Iesi.Collections.dll</HintPath>
     </Reference>
@@ -164,10 +167,22 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="ClassMaps\CompetitionMap.cs" />
+    <Compile Include="ClassMaps\CourseconfigurationMap.cs" />
+    <Compile Include="ClassMaps\HoleMap.cs" />
+    <Compile Include="ClassMaps\PlayerMap.cs" />
+    <Compile Include="ClassMaps\RoundMap.cs" />
+    <Compile Include="ClassMaps\TourMap.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
-    <Compile Include="Controllers\PBController.cs" />
+    <Compile Include="Entity\Competition.cs" />
+    <Compile Include="Entity\Courseconfiguration.cs" />
+    <Compile Include="Entity\Hole.cs" />
+    <Compile Include="Entity\Player.cs" />
+    <Compile Include="Entity\PlayerCompetitionStatus.cs" />
+    <Compile Include="Entity\Round.cs" />
+    <Compile Include="Entity\Tour.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -234,7 +249,6 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\PB\Index.cshtml" />
     <Content Include="Views\PB\Welcome.cshtml" />
   </ItemGroup>
   <ItemGroup>
