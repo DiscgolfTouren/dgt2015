@@ -1,5 +1,5 @@
 ﻿@using System.Web.UI.WebControls
-@model DGTWebSite.Models.PB
+@model DGTWebSite.Models.PBModel
 @{
     ViewBag.Title = "Welcome";
 }
@@ -9,7 +9,7 @@
 <ul>
     @for (int i = 0; i < Model.Number; i++)
     {
-        <li>@Html.DisplayTextFor(model => model.Name)</li>
+        <li>@Model.Name</li>
     }
 </ul>
 
