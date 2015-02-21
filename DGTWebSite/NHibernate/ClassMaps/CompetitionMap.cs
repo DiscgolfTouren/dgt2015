@@ -9,9 +9,9 @@ namespace DGTWebSite.NHibernate.ClassMaps
         {
             Id(c => c.Id);
             Map(c => c.Name);
-            References(c => c.Players).Cascade.All();
-            Map(c => c.Configuration);
+            HasMany(c => c.Players);
             Map(c => c.Date);
+            Map(c => c.Configuration);
         }
     }
 }

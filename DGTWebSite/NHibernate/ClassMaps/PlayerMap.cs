@@ -7,6 +7,7 @@ namespace DGTWebSite.NHibernate.ClassMaps
     {
          public PlayerMap()
          {
+             Id(p => p.Id);
              Map(p => p.FirstName);
              Map(p => p.LastName);
              Map(p => p.PdgaNumber).Not.Nullable();

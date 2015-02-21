@@ -190,7 +190,9 @@
     <Compile Include="NHibernate\ClassMaps\CompetitionMap.cs" />
     <Compile Include="NHibernate\ClassMaps\CourseconfigurationMap.cs" />
     <Compile Include="NHibernate\ClassMaps\HoleMap.cs" />
+    <Compile Include="NHibernate\ClassMaps\HoleScoreMap.cs" />
     <Compile Include="NHibernate\ClassMaps\PlayerMap.cs" />
+    <Compile Include="NHibernate\ClassMaps\PlayerResultMap.cs" />
     <Compile Include="NHibernate\ClassMaps\RoundMap.cs" />
     <Compile Include="NHibernate\ClassMaps\TourMap.cs" />
     <Compile Include="Models\PBModel.cs" />
