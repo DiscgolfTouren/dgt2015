@@ -194,6 +194,7 @@
     <Compile Include="NHibernate\ClassMaps\RoundMap.cs" />
     <Compile Include="NHibernate\ClassMaps\TourMap.cs" />
     <Compile Include="Models\PBModel.cs" />
+    <Compile Include="NHibernate\NHibernateHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\IRepository.cs" />
     <Compile Include="Startup.cs" />

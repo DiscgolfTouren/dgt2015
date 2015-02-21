@@ -7,8 +7,9 @@ namespace DGTWebSite.NHibernate.ClassMaps
     {
         public CompetitionMap()
         {
+            Id(c => c.Id);
             Map(c => c.Name);
-            Map(c => c.Players);
+            References(c => c.Players).Cascade.All();
             Map(c => c.Configuration);
             Map(c => c.Date);
         }
