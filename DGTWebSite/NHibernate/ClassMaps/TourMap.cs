@@ -7,8 +7,9 @@ namespace DGTWebSite.NHibernate.ClassMaps
     {
         public TourMap()
         {
-            Map(t => t.Competitions);
-            Map(t => t.Year);
+            Id(x => x.Id);
+            Map(x => x.Year);
+            HasMany(x => x.Competitions);
         }
     }
 }

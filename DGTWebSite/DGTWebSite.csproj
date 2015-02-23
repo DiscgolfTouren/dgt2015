@@ -192,10 +192,13 @@
     <Compile Include="NHibernate\ClassMaps\CompetitionMap.cs" />
     <Compile Include="NHibernate\ClassMaps\CourseconfigurationMap.cs" />
     <Compile Include="NHibernate\ClassMaps\HoleMap.cs" />
+    <Compile Include="NHibernate\ClassMaps\HoleScoreMap.cs" />
     <Compile Include="NHibernate\ClassMaps\PlayerMap.cs" />
+    <Compile Include="NHibernate\ClassMaps\PlayerResultMap.cs" />
     <Compile Include="NHibernate\ClassMaps\RoundMap.cs" />
     <Compile Include="NHibernate\ClassMaps\TourMap.cs" />
     <Compile Include="Models\PBModel.cs" />
+    <Compile Include="NHibernate\NHibernateHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\IRepository.cs" />
     <Compile Include="Startup.cs" />

@@ -7,10 +7,11 @@ namespace DGTWebSite.NHibernate.ClassMaps
     {
          public RoundMap()
          {
-             Map(r => r.Competition);
-             Map(r => r.Courseconfig);
-             Map(r => r.PlayerResults);
-             Map(r => r.RoundNumber);
+             Id(x => x.Id);
+             References(x => x.Competition).Cascade.All();
+             References(x => x.Courseconfig).Cascade.All();
+             Map(x => x.RoundNumber);
+             HasMany(x => x.PlayerResults);
          }
     }
 }

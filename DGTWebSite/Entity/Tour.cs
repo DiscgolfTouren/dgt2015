@@ -4,7 +4,8 @@ namespace DGTWebSite.Entity
 {
     public class Tour
     {
-        public string Year { get; set; }
-        public IList<Competition> Competitions { get; set; }
+        public virtual int Id { get; set; }
+        public virtual string Year { get; set; }
+        public virtual IList<Competition> Competitions { get; set; }
     }
 }

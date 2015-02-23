@@ -7,6 +7,7 @@ namespace DGTWebSite.NHibernate.ClassMaps
     {
          public HoleMap()
          {
+             Id(h => h.Id);
              Map(h => h.Number);
              Map(h => h.Par);
              Map(h => h.Elevation);

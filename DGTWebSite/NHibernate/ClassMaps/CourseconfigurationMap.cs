@@ -7,8 +7,9 @@ namespace DGTWebSite.NHibernate.ClassMaps
     {
          public CourseconfigurationMap()
          {
+             Id(c => c.Id);
              Map(c => c.CourseName);
-             Map(c => c.Holes);
+             HasMany(c => c.Holes);
          }
     }
 }
