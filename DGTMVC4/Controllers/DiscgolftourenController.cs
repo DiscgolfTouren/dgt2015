@@ -4,27 +4,25 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace DGTWebSite.Controllers
+namespace DGTMVC4.Controllers
 {
-    public class HomeController : Controller
+    public class DiscgolftourenController : Controller
     {
+        //
+        // GET: /Discgolftouren/
         public ActionResult Index()
         {
             return View();
         }
 
-        public ActionResult About()
+        public ActionResult Om()
         {
-            ViewBag.Message = "Your application description page.";
-
             return View();
         }
 
-        public ActionResult Contact()
+        public ActionResult Kontakt()
         {
-            ViewBag.Message = "Your contact page.";
-
             return View();
         }
-    }
+	}
 }
