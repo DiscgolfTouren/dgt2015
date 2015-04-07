@@ -20,7 +20,17 @@ namespace DGTMVC4.Controllers
             return View();
         }
 
+        public ActionResult Tournaments()
+        {
+            return View();
+        }
+
         public ActionResult Kontakt()
+        {
+            return View();
+        }
+
+        public ActionResult Hur()
         {
             return View();
         }

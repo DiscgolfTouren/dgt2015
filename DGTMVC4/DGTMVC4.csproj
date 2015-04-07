@@ -145,6 +145,7 @@
     <Compile Include="Controllers\DiscgolftourenController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PBController.cs" />
+    <Compile Include="Controllers\TournamentsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -265,6 +266,12 @@
     <Content Include="Views\Discgolftouren\Index.cshtml" />
     <Content Include="Views\Discgolftouren\Kontakt.cshtml" />
     <Content Include="Views\Discgolftouren\Om.cshtml" />
+    <Content Include="Views\Discgolftouren\Tournaments.cshtml" />
+    <Content Include="Views\Tournaments\Tournament.cshtml" />
+    <Content Include="Views\Tournaments\Registration.cshtml" />
+    <Content Include="Views\Tournaments\Result.cshtml" />
+    <Content Include="Views\Discgolftouren\Hur.cshtml" />
+    <Content Include="Views\Tournaments\Standings.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

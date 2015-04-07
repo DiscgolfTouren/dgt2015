@@ -1,16 +1,22 @@
-﻿<div id="fb-root"></div>
-<script>
-(function (d, s, id) {
-    var js, fjs = d.getElementsByTagName(s)[0];
-    if (d.getElementById(id)) return;
-    js = d.createElement(s); js.id = id;
-    js.src = "//connect.facebook.net/sv_SE/sdk.js#xfbml=1&version=v2.0";
-    fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));</script>
-<div class="col-md-12">
+﻿@{
+    ViewBag.Title = "Index";
+}
+
+<div class="jumbotron">
     <h1>Kontakt</h1>
+    <div id="fb-root"></div>
+    <script>
+        (function (d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s); js.id = id;
+            js.src = "//connect.facebook.net/sv_SE/sdk.js#xfbml=1&version=v2.0";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));</script>
+
     <p class="form-control-static">discgolftouren@gmail.com</p>
     <p>
         <div class="fb-follow" data-href="https://www.facebook.com/pages/Discgolftouren/762510567171080" data-colorscheme="light" data-layout="standard" data-show-faces="true"></div>
     </p>
+</div>
 </div>
