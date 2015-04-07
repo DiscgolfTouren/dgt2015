@@ -150,6 +150,8 @@
     </Compile>
     <Compile Include="Models\PBModel.cs" />
     <Compile Include="NHibernate\Enums\PlayerCompetitionStatus.cs" />
+    <Compile Include="NHibernate\Mappings\HoleMap.cs" />
+    <Compile Include="NHibernate\Mappings\HoleScoreMap.cs" />
     <Compile Include="NHibernate\Mappings\PlayerMap.cs" />
     <Compile Include="NHibernate\Models\Competition.cs" />
     <Compile Include="NHibernate\Models\Courseconfiguration.cs" />
