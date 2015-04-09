@@ -9,5 +9,16 @@ namespace DGTMVC4.NHibernate.Models
         public virtual IList<Hole> Holes { get; set; }
         public virtual string Description { get; set; }
         public virtual string CourseMap { get; set; }
+
+        public Courseconfiguration()
+        {
+            Holes = new List<Hole>();
+        }
+
+        public virtual void AddHole(Hole hole)
+        {
+            hole.Courseconfiguration = this;
+            Holes.Add(hole);
+        }
     }
 }

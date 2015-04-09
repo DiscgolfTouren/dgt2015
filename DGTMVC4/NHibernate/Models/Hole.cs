@@ -8,5 +8,7 @@
         public virtual int Elevation { get; set; }
         public virtual int Length { get; set; }
         public virtual string Description { get; set; }
+
+        public virtual Courseconfiguration Courseconfiguration { get; set; }
     }
 }
