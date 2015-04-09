@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!--This file represents the results of running a test suite-->
+<test-results name="D:\w\Discgolf\dgt2015\DGTMVC4\DGTMVC4.nunit" total="2" errors="0" failures="0" not-run="0" inconclusive="0" ignored="0" skipped="0" invalid="0" date="2015-04-09" time="22:27:39">
+  <environment nunit-version="2.6.4.14350" clr-version="2.0.50727.8009" os-version="Microsoft Windows NT 6.2.9200.0" platform="Win32NT" cwd="C:\Program Files (x86)\NUnit 2.6.4\bin" machine-name="BYGDE42" user="peterbygde" user-domain="BYGDE42" />
+  <culture-info current-culture="sv-SE" current-uiculture="sv-SE" />
+  <test-suite type="Project" name="D:\w\Discgolf\dgt2015\DGTMVC4\DGTMVC4.nunit" executed="True" result="Success" success="True" time="5.283" asserts="0">
+    <results>
+      <test-suite type="Assembly" name="D:\w\Discgolf\dgt2015\DGTMVC4\bin\DGTMVC4.dll" executed="True" result="Success" success="True" time="5.264" asserts="0">
+        <results>
+          <test-suite type="Namespace" name="DGTMVC4" executed="True" result="Success" success="True" time="5.264" asserts="0">
+            <results>
+              <test-suite type="Namespace" name="NHibernate" executed="True" result="Success" success="True" time="5.264" asserts="0">
+                <results>
+                  <test-suite type="TestFixture" name="NHibernateFactoryTest" executed="True" result="Success" success="True" time="5.262" asserts="0">
+                    <results>
+                      <test-case name="DGTMVC4.NHibernate.NHibernateFactoryTest.Add_Holes_And_Courseconfiguration" executed="True" result="Success" success="True" time="5.217" asserts="0" />
+                      <test-case name="DGTMVC4.NHibernate.NHibernateFactoryTest.Add_Player" executed="True" result="Success" success="True" time="0.018" asserts="0" />
+                    </results>
+                  </test-suite>
+                </results>
+              </test-suite>
+            </results>
+          </test-suite>
+        </results>
+      </test-suite>
+    </results>
+  </test-suite>
+</test-results>
