@@ -13,6 +13,7 @@ namespace DGTMVC4.NHibernate.Mappings
             Map(h => h.Elevation);
             Map(h => h.Length);
             Map(h => h.Description);
+            References(h => h.Courseconfiguration);
         }
          
     }
