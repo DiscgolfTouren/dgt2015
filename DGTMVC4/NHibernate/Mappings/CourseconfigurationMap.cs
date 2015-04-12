@@ -14,6 +14,7 @@ namespace DGTMVC4.NHibernate.Mappings
                  .Cascade.All();
              Map(c => c.Description);
              Map(c => c.CourseMap);
+             References(c => c.Round);
          }
     }
 }

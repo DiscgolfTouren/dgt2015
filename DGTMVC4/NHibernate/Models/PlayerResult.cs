@@ -9,5 +9,18 @@ namespace DGTMVC4.NHibernate.Models
         public virtual IList<HoleScore> Scores { get; set; }
         public virtual int Penalties { get; set; }
         public virtual int Place { get; set; }
+
+        public virtual Round Round { get; set; }
+
+        public PlayerResult()
+        {
+            Scores = new List<HoleScore>();
+        }
+
+        public virtual void AddHoleScore(HoleScore holeScore)
+        {
+            holeScore.PlayerResult = this;
+            Scores.Add(holeScore);
+        }
     }
 }

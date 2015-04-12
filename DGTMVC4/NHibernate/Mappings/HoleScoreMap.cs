@@ -10,6 +10,7 @@ namespace DGTMVC4.NHibernate.Mappings
             Id(h => h.Id);
             Map(h => h.HoleNumber);
             Map(h => h.Score);
+            References(h => h.PlayerResult);
         }
          
     }

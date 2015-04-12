@@ -5,5 +5,7 @@
         public virtual int Id { get; set; }
         public virtual int HoleNumber { get; set; }
         public virtual int Score { get; set; }
+
+        public virtual PlayerResult PlayerResult { get; set; }
     }
 }

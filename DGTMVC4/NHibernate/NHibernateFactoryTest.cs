@@ -66,5 +66,39 @@ namespace DGTMVC4.NHibernate
                 }
             }
         }
+
+        [Test]
+        public void Add_PlayerResult_For_Player()
+        {
+            using (var session = NHibernateFactory.OpenSession())
+            {
+                using (var transaction = session.BeginTransaction())
+                {
+                    var hole1score = new HoleScore {HoleNumber = 1, Score = 3};
+                    var hole2score = new HoleScore {HoleNumber = 2, Score = 3};
+
+                    var player = new Player
+                        {
+                            FirstName = "Mikael",
+                            LastName = "Edvardsson"
+                        };
+
+                    var playerResult = new PlayerResult
+                        {
+                            Player = player,
+                            Penalties = 0,
+                            Place = 1
+                        };
+
+                    playerResult.AddHoleScore(hole1score);
+                    playerResult.AddHoleScore(hole2score);
+
+                    session.Save(player);
+                    session.Save(playerResult);
+                    transaction.Commit();
+                }
+            }
+
+        }
     }
 }

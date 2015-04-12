@@ -9,5 +9,10 @@ namespace DGTMVC4.NHibernate.Models
         public virtual Courseconfiguration Courseconfig { get; set; }
         public virtual int RoundNumber { get; set; }
         public virtual IList<PlayerResult> PlayerResults { get; set; }
+
+        public Round()
+        {
+            PlayerResults = new List<PlayerResult>();
+        }
     }
 }

@@ -8,5 +8,10 @@ namespace DGTMVC4.NHibernate.Models
         public virtual string Year { get; set; }
         public virtual IList<Competition> Competitions { get; set; }
         public virtual string Description { get; set; }
+
+        public Tour()
+        {
+            Competitions = new List<Competition>();
+        }
     }
 }

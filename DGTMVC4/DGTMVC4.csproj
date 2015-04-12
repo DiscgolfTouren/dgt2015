@@ -151,16 +151,22 @@
     </Compile>
     <Compile Include="Models\PBModel.cs" />
     <Compile Include="NHibernate\Enums\PlayerCompetitionStatus.cs" />
+    <Compile Include="NHibernate\Mappings\CompetitionMap.cs" />
     <Compile Include="NHibernate\Mappings\CourseconfigurationMap.cs" />
     <Compile Include="NHibernate\Mappings\HoleMap.cs" />
     <Compile Include="NHibernate\Mappings\HoleScoreMap.cs" />
     <Compile Include="NHibernate\Mappings\PlayerMap.cs" />
+    <Compile Include="NHibernate\Mappings\PlayerResultMap.cs" />
+    <Compile Include="NHibernate\Mappings\PlayerStatusMap.cs" />
+    <Compile Include="NHibernate\Mappings\RoundMap.cs" />
+    <Compile Include="NHibernate\Mappings\TourMap.cs" />
     <Compile Include="NHibernate\Models\Competition.cs" />
     <Compile Include="NHibernate\Models\Courseconfiguration.cs" />
     <Compile Include="NHibernate\Models\Hole.cs" />
     <Compile Include="NHibernate\Models\HoleScore.cs" />
     <Compile Include="NHibernate\Models\Player.cs" />
     <Compile Include="NHibernate\Models\PlayerResult.cs" />
+    <Compile Include="NHibernate\Models\PlayerStatus.cs" />
     <Compile Include="NHibernate\Models\Round.cs" />
     <Compile Include="NHibernate\Models\Tour.cs" />
     <Compile Include="NHibernate\NHibernateFactory.cs" />
