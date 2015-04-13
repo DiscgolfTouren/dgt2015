@@ -16,11 +16,23 @@ namespace DGTMVC4.NHibernate.Models
         public virtual string Description { get; set; }
 
         public virtual Tour Tour { get; set; }
-        public virtual Round Round { get; set; }
 
         public Competition()
         {
             Rounds = new List<Round>();
+            Players = new List<PlayerStatus>();
+        }
+
+        public virtual void AddPlayer(PlayerStatus playerStatus)
+        {
+            playerStatus.Competition = this;
+            Players.Add(playerStatus);
+        }
+
+        public virtual void AddRound(Round round)
+        {
+            round.Competition = this;
+            Rounds.Add(round);
         }
     }
 }
