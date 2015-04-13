@@ -1,20 +1,48 @@
 ﻿@model DGTMVC4.Models.RegistrationViewModel
 
-<div>
-    <h2>Anmälningsförfarande</h2>
-    <p>
-        Anmälan till samtliga deltävlingar 2015 förutom till den första deltävlingen 
-        öppnar klockan 20 en månad innan tävlingsdatumet.
-    </p>
-    <p>
-        Fyll i formuläret nedan och betala därefter in anmälningsavgiften på 200 kr 
-        till Nordea konto 3160-4537167 alternativt via Swish till telefonnummer 0736153777 (Daniel Skymberg). 
-        När anmälningsformuläret är ifyllt står ditt namn under pågående registreringar och 
-        när din betalning är registrerad kommer ditt namn upp på listan över registrerade spelare. 
-    </p>
-    <p>
-        I mån av plats går det även bra att anmäla sig på plats. Betalning görs kontant.
-    </p>
+<div class="row">
+    <div class="col-md-6">
+        <h3>Anmälan</h3>
+        <p>
+            Anmälan till samtliga deltävlingar 2015 förutom till den första deltävlingen
+            öppnar klockan 20 en månad innan tävlingsdatumet.
+        </p>
+        <p>
+            I mån av plats går det bra att anmäla sig på plats. Betalning görs då kontant.
+            För att säkra en plats anmäler du dig på denna sida.
+        </p>
+        <h3>Avanmälan</h3>
+        <p>
+            Avanmälningar görs via mejl, discgolftouren (a) gmail.com,
+            senast 2 dagar (kl 23.00) innan tävling för att få tillbaka anmälningsavgiften.
+            Uppge då hur du vill ha pengarna tillbaka(swish eller banköverföring).
+        </p>
+    </div>
+    <div class="col-md-6">
+        <h3>Steg 1 - kontrollera rating</h3>
+        <p>
+            Ange pdga nummer och kontrollera om du har tillräcklig rating för att kunna anmäla dig.
+        </p>
+        <h3>Steg 2 - anmälan</h3>
+        <p>
+            Kontrollera att rätt namn visas och anmäl dig. 
+            Efter anmälan står ditt namn i listan för pågående registreringar
+        </p>
+        <h3>Steg 3 - betalning</h3>
+        <p>
+            Betala anmälningsavgiften på 200 kr på något av följande sätt
+            <ul>
+                <li>Nordea konto 3160-4537167</li>
+                <li>Swish till 0736153777 (Daniel Skymberg)</li>
+            </ul>
+        </p>
+        <h3>Steg 4 - betalning mottagen</h3>
+        <p>
+            När din betalning är mottagen och registrerad kommer ditt namn upp på listan över registrerade spelare.
+            <br />
+            <strong>OBS!</strong> Om det inte finns någon plats att tilldela hamnar du i väntelistan
+        </p>
+    </div>
 </div>
 <div>
     @using (Html.BeginForm())
@@ -22,12 +50,12 @@
         if (!Model.SpelareOk && !Model.SpelareAnmald)
         {
             <p>
-                @if(Model.Meddelande != null)
+                @if (Model.Meddelande != null)
                 {
-                   @Html.Label(Model.Meddelande);
+                    @Html.Label(Model.Meddelande);
                     <br />
                     <br />
-                        
+
                 }
                 @Html.Label("Ange ditt PDGA nummer")<br />
                 @Html.TextBox("PDGANummer")
@@ -62,11 +90,4 @@
             </p>
         }
     }
-</div>
-<div>
-    <h2>Avanmälning</h2>
-    <p>
-        Avanmälningar görs via mejl, discgolftouren (a) gmail.com, senast 2 dagar (kl 23.00) innan tävling för att få tillbaka anmälningsavgiften. 
-        Uppge då hur du vill ha pengarna tillbaka(swish eller banköverföring). 
-    </p>
 </div>
