@@ -11,6 +11,12 @@ namespace DGTMVC4.NHibernate
     public class NHibernateFactory
     {
         private static ISessionFactory _sessionFactory;
+        private static string _database = "dgt";
+
+        public static void SetDatabase(string database)
+        {
+            _database = database;
+        }
 
         private static ISessionFactory SessionFactory
         {
@@ -30,11 +36,11 @@ namespace DGTMVC4.NHibernate
                                                     .Standard
                                                     .ConnectionString(cs => cs
                                                                                 .Server("localhost")
-                                                                                .Database("dgt")
+                                                                                .Database(_database)
                                                                                 .Username("peterby_dgtadmin")
                                                                                 .Password("dgt2015")))
                                       .Mappings(m => m.FluentMappings.AddFromAssembly(Assembly.GetExecutingAssembly()))
-                                      .ExposeConfiguration(cfg => new SchemaExport(cfg).Create(false, true))
+                                      .ExposeConfiguration(cfg => new SchemaUpdate(cfg).Execute(false, true))
                                       .BuildSessionFactory();
         }
 

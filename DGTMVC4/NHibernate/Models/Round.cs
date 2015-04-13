@@ -14,5 +14,11 @@ namespace DGTMVC4.NHibernate.Models
         {
             PlayerResults = new List<PlayerResult>();
         }
+
+        public virtual void AddPlayerResult(PlayerResult playerResult)
+        {
+            playerResult.Round = this;
+            PlayerResults.Add(playerResult);
+        }
     }
 }

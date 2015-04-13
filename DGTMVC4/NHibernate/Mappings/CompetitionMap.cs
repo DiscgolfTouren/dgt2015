@@ -19,7 +19,6 @@ namespace DGTMVC4.NHibernate.Mappings
              Map(x => x.PdgaWebPage);
              Map(x => x.Description);
              References(x => x.Tour);
-             References(x => x.Round);
          }
     }
 }

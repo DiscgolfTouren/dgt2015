@@ -13,5 +13,11 @@ namespace DGTMVC4.NHibernate.Models
         {
             Competitions = new List<Competition>();
         }
+
+        public virtual void AddCompetition(Competition competition)
+        {
+            competition.Tour = this;
+            Competitions.Add(competition);
+        }
     }
 }
