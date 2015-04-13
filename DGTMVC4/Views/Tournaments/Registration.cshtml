@@ -1,8 +1,20 @@
 ﻿@model DGTMVC4.Models.RegistrationViewModel
 
-<div class="jumbotron">
-
-    <h2>Anmälan</h2>
+<div>
+    <h2>Anmälningsförfarande</h2>
+    <p>
+        Anmälan till samtliga deltävlingar 2015 förutom till den första deltävlingen 
+        öppnar klockan 20 en månad innan tävlingsdatumet.
+    </p>
+    <p>
+        Fyll i formuläret nedan och betala därefter in anmälningsavgiften på 200 kr 
+        till Nordea konto 3160-4537167 alternativt via Swish till telefonnummer 0736153777 (Daniel Skymberg). 
+        När anmälningsformuläret är ifyllt står ditt namn under pågående registreringar och 
+        när din betalning är registrerad kommer ditt namn upp på listan över registrerade spelare. 
+    </p>
+    <p>
+        I mån av plats går det även bra att anmäla sig på plats. Betalning görs kontant.
+    </p>
 </div>
 <div>
     @using (Html.BeginForm())
@@ -50,4 +62,11 @@
             </p>
         }
     }
+</div>
+<div>
+    <h2>Avanmälning</h2>
+    <p>
+        Avanmälningar görs via mejl, discgolftouren (a) gmail.com, senast 2 dagar (kl 23.00) innan tävling för att få tillbaka anmälningsavgiften. 
+        Uppge då hur du vill ha pengarna tillbaka(swish eller banköverföring). 
+    </p>
 </div>
