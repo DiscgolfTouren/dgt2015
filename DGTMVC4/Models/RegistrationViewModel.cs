@@ -1,0 +1,27 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+
+namespace DGTMVC4.Models
+{
+    public class RegistrationViewModel
+    {
+        public RegistrationViewModel()
+        {
+        }
+
+        public string PDGANummer { get; set; }
+        public string Fornamn { get; set; }
+        public string Efternamn { get; set; }
+
+        public string EPost { get; set; }
+
+        public long TavlingsId { get; set; }
+        public long SpelareId { get; set; }
+        public bool SpelareOk { get; set; }
+        public bool SpelareAnmald { get; set; }
+
+        public string Meddelande { get; set; }
+    }
+}

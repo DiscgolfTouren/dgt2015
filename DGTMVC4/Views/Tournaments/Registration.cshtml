@@ -1,9 +1,53 @@
-﻿@{
-    ViewBag.Title = "Anmälan";
-}
+﻿@model DGTMVC4.Models.RegistrationViewModel
 
 <div class="jumbotron">
 
     <h2>Anmälan</h2>
-    <p>@ViewBag.Message</p>
+</div>
+<div>
+    @using (Html.BeginForm())
+    {
+        if (!Model.SpelareOk && !Model.SpelareAnmald)
+        {
+            <p>
+                @if(Model.Meddelande != null)
+                {
+                   @Html.Label(Model.Meddelande);
+                    <br />
+                    <br />
+                        
+                }
+                @Html.Label("Ange ditt PDGA nummer")<br />
+                @Html.TextBox("PDGANummer")
+                <input type="submit" name="kontrolleraPDGA" value="Kontrollera PDGA nummer" />
+            </p>
+        }
+        else if (Model.SpelareOk && !Model.SpelareAnmald)
+        {
+            <p>
+                @Html.Hidden("SpelareOk")
+                @Html.Hidden("PDGANummer")
+                @Html.Hidden("Fornamn")
+                @Html.Hidden("Efternamn")
+
+                @string.Format("Spelare: {0} {1} #{2} ", Model.Fornamn, Model.Efternamn, Model.PDGANummer)
+                <br />
+                <br />
+                Vill du anmäla dig till DGT 1 Ultuna ?&nbsp;&nbsp;
+                <input type="submit" name="RegistreraAnmalan" value="Registrera anmälan" />
+            </p>
+        }
+        else if (Model.SpelareOk && Model.SpelareAnmald)
+        {
+            <p>
+                @Html.Hidden("SpelareOk")
+                @Html.Hidden("SpelareAnmald")
+                @Html.Hidden("PDGANummer")
+                @Html.Hidden("Fornamn")
+                @Html.Hidden("Efternamn")
+
+                @string.Format("Spelare: {0} {1} #{2} är anmäld", Model.Fornamn, Model.Efternamn, Model.PDGANummer)
+            </p>
+        }
+    }
 </div>
