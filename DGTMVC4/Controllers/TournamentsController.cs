@@ -25,39 +25,48 @@ namespace DGTMVC4.Controllers
                 // kontrollera PDGA nummer
                 if (!string.IsNullOrEmpty(vm.PDGANummer))
                 {
-                    // om spelare redan reggad
-                    //     om Ok
-                    //        visa spelaren
-                    // annars kontrollera med pdga
-                    //     om Ok
-                    //        regga spelaren
-                    //        visa spelaren
-
-                    // PDGA kontroll
                     vm.PDGANummer = vm.PDGANummer.Trim();
                     int pdgaNummer = 0;
                     if (int.TryParse(vm.PDGANummer, out pdgaNummer))
                     {
+                        // kontrollera om redan registrerad i systemet
                         var player = HamtaPlayer(vm.PDGANummer);
-                        PDGASaker.PDGAPlayer pdgaPlayer = PDGASaker.PDGARESTApi.GetMemberInfo(vm.PDGANummer);
-                        int playerRating = 0;
-                        int.TryParse(pdgaPlayer.rating, out playerRating);
-                        if (pdgaPlayer != null && pdgaPlayer.pdga_number != null && pdgaPlayer.membership_status == "current" && playerRating >= 930)
+                        if (player != null && player.RatingDate.Year == DateTime.Now.Year)
                         {
                             vm.SpelareOk = true;
-                            vm.Fornamn = pdgaPlayer.first_name;
-                            vm.Efternamn = pdgaPlayer.last_name;
-                            // registrera spelaren
+                            vm.Fornamn = player.FirstName;
+                            vm.Efternamn = player.LastName;
                         }
-                        else
+                        else // om inte i systemet kontrollera med PDGA
                         {
-                            if (playerRating < 930 && pdgaPlayer.membership_status == "current")
+                            PDGASaker.PDGAPlayer pdgaPlayer = PDGASaker.PDGARESTApi.GetMemberInfo(vm.PDGANummer);
+                            int playerRating = 0;
+                            int.TryParse(pdgaPlayer.rating, out playerRating);
+                            if (pdgaPlayer != null && pdgaPlayer.pdga_number != null && pdgaPlayer.membership_status == "current" && playerRating >= 930)
                             {
-                                vm.Meddelande = "Din rating måste vara 930 eller högre";
+                                vm.SpelareOk = true;
+                                vm.Fornamn = pdgaPlayer.first_name;
+                                vm.Efternamn = pdgaPlayer.last_name;
+                                var playerModel = new Player();
+                                playerModel.FirstName = pdgaPlayer.first_name;
+                                playerModel.LastName = pdgaPlayer.last_name;
+                                playerModel.PdgaNumber = pdgaPlayer.pdga_number;
+                                playerModel.Rating = pdgaPlayer.rating;
+                                playerModel.RatingDate = DateTime.Now;
+
+                                SparaPlayer(playerModel);
+                                vm.SpelareId = playerModel.Id;
                             }
                             else
                             {
-                                vm.Meddelande = string.Format("Angivet PDGAnummer: {0} är inte Ok!", vm.PDGANummer);
+                                if (playerRating < 930 && pdgaPlayer.membership_status == "current")
+                                {
+                                    vm.Meddelande = "Din rating måste vara 930 eller högre";
+                                }
+                                else
+                                {
+                                    vm.Meddelande = string.Format("Angivet PDGAnummer: {0} är inte Ok!", vm.PDGANummer);
+                                }
                             }
                         }
                     }
@@ -70,6 +79,9 @@ namespace DGTMVC4.Controllers
             else if (registreraAnmalan != null)
             {
                 // registrera anmälan
+                // todo när det finns mer än en tävling så har den förmodligen id != 1
+                vm.TavlingsId = 1;
+                RegistreraAnmalan(vm);
                 vm.SpelareAnmald = true;
             }
 
@@ -88,15 +100,64 @@ namespace DGTMVC4.Controllers
             return View();
         }
 
+        private void SparaPlayer(Player player)
+        {
+            using (var session = NHibernateFactory.OpenSession())
+            {
+                using (var transaction = session.BeginTransaction())
+                {
+                    session.SaveOrUpdate(player);
+                    transaction.Commit();
+                }
+            }
+        }
+
         public Player HamtaPlayer(string PDGANummer)
         {
             using (var session = NHibernateFactory.OpenSession())
             {
-                var player = session.QueryOver<Player>().Where(p => p.PdgaNumber == PDGANummer); 
-
+                var players = session.QueryOver<Player>().Where(p => p.PdgaNumber == PDGANummer).List<Player>();
+                if (players.Count > 0)
+                {
+                    return players[0];
+                }
             }
 
             return null;
         }
+
+        public Competition HamtaCompetition(int id)
+        {
+            using (var session = NHibernateFactory.OpenSession())
+            {
+                var competition = session.Get<Competition>(id);
+                
+
+                return competition;
+            }
+        }
+
+        private void RegistreraAnmalan(RegistrationViewModel vm)
+        {
+            using (var session = NHibernateFactory.OpenSession())
+            {
+                using (var transaction = session.BeginTransaction())
+                {
+                    var playerstatusModel = new PlayerStatus();
+                    var player = HamtaPlayer(vm.PDGANummer);
+                    var competition = HamtaCompetition(vm.TavlingsId);
+                    if(player != null && competition != null)
+                    {
+                        playerstatusModel.Competition = competition;
+                        playerstatusModel.Player = player;
+                        playerstatusModel.Status = NHibernate.Enums.PlayerCompetitionStatus.Registered;
+                        session.SaveOrUpdate(playerstatusModel);
+                        transaction.Commit();
+                    }
+                }
+            }
+        }
+
+
     }
 }

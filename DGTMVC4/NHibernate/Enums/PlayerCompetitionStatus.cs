@@ -3,6 +3,7 @@
     public enum PlayerCompetitionStatus
     {
         Registered,
-        Payed
+        Payed,
+        Waiting
     }
 }

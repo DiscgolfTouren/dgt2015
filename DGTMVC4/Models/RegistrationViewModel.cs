@@ -17,8 +17,8 @@ namespace DGTMVC4.Models
 
         public string EPost { get; set; }
 
-        public long TavlingsId { get; set; }
-        public long SpelareId { get; set; }
+        public int TavlingsId { get; set; }
+        public int SpelareId { get; set; }
         public bool SpelareOk { get; set; }
         public bool SpelareAnmald { get; set; }
 
