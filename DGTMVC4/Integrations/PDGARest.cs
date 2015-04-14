@@ -11,15 +11,15 @@ namespace PDGASaker
 {
     public static class PDGARESTApi
     {
-        public static PDGAPlayer GetMemberInfo(string pdgaNumber)
+        public static PDGAPlayer GetMemberInfo(string pdgaNumber, string username, string password)
         {
             var client = new RestClient();
 
             // Login
             client.BaseUrl = new Uri("https://api.pdga.com/services/json/user/login");
             var request = new RestRequest(Method.POST);
-            request.AddParameter("username", "SFF_DGR");
-            request.AddParameter("password", "!qaz2wsX");
+            request.AddParameter("username", username);
+            request.AddParameter("password", password);
             var response = client.Execute<PDGASession>(request);
             client.CookieContainer = new CookieContainer();
             var cookie = new Cookie(response.Data.session_name, response.Data.sessid);
