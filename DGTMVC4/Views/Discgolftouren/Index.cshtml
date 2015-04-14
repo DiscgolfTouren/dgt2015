@@ -1,4 +1,4 @@
-@model DGTMVC4.Models.CompetitionsViewModel
+﻿@model DGTMVC4.Models.CompetitionsViewModel
 
 <div class="jumbotron">
     <h1>Discgolftouren</h1>
@@ -85,12 +85,15 @@
     <div class="col-md-3">
         <h3>Tävlingar</h3>
         <div class="list-group">
-            @Model.Competitions[0].Name
-            <a class="list-group-item" href="/Tournaments/Tournament/1">25/4 Ultuna</a>
+            @foreach (var comp in Model.Competitions)
+            {
+                 <a class="list-group-item" href="/Tournaments/@string.Format(@"{0}/{1}/{2}", comp.Date.ToString("dd/M"), comp.Name, comp.Id)">25/4 Ultuna</a>
+            }
+            @*<a class="list-group-item" href="/Tournaments/Tournament/1">25/4 Ultuna</a>
             <a class="list-group-item" href="/Tournaments/Tournament/2">17/5 Visättra</a>
             <a class="list-group-item" href="/Tournaments/Tournament/3">25/7 Eskilstuna</a>
             <a class="list-group-item" href="/Tournaments/Tournament/4">15/8 Lillsjön</a>
-            <a class="list-group-item" href="/Tournaments/Tournament/5">29/8 Åkersberga</a>
+            <a class="list-group-item" href="/Tournaments/Tournament/5">29/8 Åkersberga</a>*@
         </div>
 
         @*<div class="alert alert-danger alert-error">
