@@ -1,4 +1,6 @@
-﻿<div class="jumbotron">
+@model DGTMVC4.Models.CompetitionsViewModel
+
+<div class="jumbotron">
     <h1>Discgolftouren</h1>
 </div>
 <div class="row">
@@ -83,6 +85,7 @@
     <div class="col-md-3">
         <h3>Tävlingar</h3>
         <div class="list-group">
+            @Model.Competitions[0].Name
             <a class="list-group-item" href="/Tournaments/Tournament/1">25/4 Ultuna</a>
             <a class="list-group-item" href="/Tournaments/Tournament/2">17/5 Visättra</a>
             <a class="list-group-item" href="/Tournaments/Tournament/3">25/7 Eskilstuna</a>
