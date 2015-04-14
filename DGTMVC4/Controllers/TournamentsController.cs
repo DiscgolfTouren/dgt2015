@@ -81,8 +81,8 @@ namespace DGTMVC4.Controllers
             else if (registreraAnmalan != null)
             {
                 // registrera anmälan
-                // todo när det finns mer än en tävling så har den förmodligen id != 1
-                vm.TavlingsId = 1;
+                // todo när det finns mer än en tävling så har den förmodligen id != 2
+                vm.TavlingsId = 2;
                 RegistreraAnmalan(vm);
                 vm.SpelareAnmald = true;
             }
