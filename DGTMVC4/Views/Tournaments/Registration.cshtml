@@ -25,7 +25,7 @@
         </p>
         <h3>Steg 2 - anmälan</h3>
         <p>
-            Kontrollera att rätt namn visas och anmäl dig. 
+            Kontrollera att rätt namn visas och anmäl dig.
             Efter anmälan står ditt namn i listan för pågående registreringar
         </p>
         <h3>Steg 3 - betalning</h3>
@@ -47,47 +47,57 @@
 <div>
     @using (Html.BeginForm())
     {
-        if (!Model.SpelareOk && !Model.SpelareAnmald)
+        if (Model.SpelareRegistrerad)
         {
+            @Html.Hidden("SpelareRegistrerad")
             <p>
-                @if (Model.Meddelande != null)
-                {
-                    @Html.Label(Model.Meddelande);
-                    <br />
-                    <br />
-
-                }
-                @Html.Label("Ange ditt PDGA nummer")<br />
-                @Html.TextBox("PDGANummer")
-                <input type="submit" name="kontrolleraPDGA" value="Kontrollera PDGA nummer" />
+                @string.Format("Spelare: {0} {1} #{2} är registrerad till Ultuna", Model.Fornamn, Model.Efternamn, Model.PDGANummer)
             </p>
         }
-        else if (Model.SpelareOk && !Model.SpelareAnmald)
+        else
         {
-            <p>
-                @Html.Hidden("SpelareOk")
-                @Html.Hidden("PDGANummer")
-                @Html.Hidden("Fornamn")
-                @Html.Hidden("Efternamn")
+            if (!Model.SpelareOk && !Model.SpelareAnmald)
+            {
+                <p>
+                    @if (Model.Meddelande != null)
+                    {
+                        @Html.Label(Model.Meddelande);
+                        <br />
+                        <br />
 
-                @string.Format("Spelare: {0} {1} #{2} ", Model.Fornamn, Model.Efternamn, Model.PDGANummer)
-                <br />
-                <br />
-                Vill du anmäla dig till DGT 1 Ultuna ?&nbsp;&nbsp;
-                <input type="submit" name="RegistreraAnmalan" value="Registrera anmälan" />
-            </p>
-        }
-        else if (Model.SpelareOk && Model.SpelareAnmald)
-        {
-            <p>
-                @Html.Hidden("SpelareOk")
-                @Html.Hidden("SpelareAnmald")
-                @Html.Hidden("PDGANummer")
-                @Html.Hidden("Fornamn")
-                @Html.Hidden("Efternamn")
+                    }
+                    @Html.Label("Ange ditt PDGA nummer")<br />
+                    @Html.TextBox("PDGANummer")
+                    <input type="submit" name="kontrolleraPDGA" value="Kontrollera PDGA nummer" />
+                </p>
+            }
+            else if (Model.SpelareOk && !Model.SpelareAnmald)
+            {
+                <p>
+                    @Html.Hidden("SpelareOk")
+                    @Html.Hidden("PDGANummer")
+                    @Html.Hidden("Fornamn")
+                    @Html.Hidden("Efternamn")
 
-                @string.Format("Spelare: {0} {1} #{2} är anmäld", Model.Fornamn, Model.Efternamn, Model.PDGANummer)
-            </p>
+                    @string.Format("Spelare: {0} {1} #{2} ", Model.Fornamn, Model.Efternamn, Model.PDGANummer)
+                    <br />
+                    <br />
+                    Vill du anmäla dig till DGT 1 Ultuna ?&nbsp;&nbsp;
+                    <input type="submit" name="RegistreraAnmalan" value="Registrera anmälan" />
+                </p>
+            }
+            else if (Model.SpelareOk && Model.SpelareAnmald)
+            {
+                <p>
+                    @Html.Hidden("SpelareOk")
+                    @Html.Hidden("SpelareAnmald")
+                    @Html.Hidden("PDGANummer")
+                    @Html.Hidden("Fornamn")
+                    @Html.Hidden("Efternamn")
+
+                    @string.Format("Spelare: {0} {1} #{2} är anmäld", Model.Fornamn, Model.Efternamn, Model.PDGANummer)
+                </p>
+            }
         }
     }
 </div>

@@ -36,6 +36,7 @@ namespace DGTMVC4.Controllers
                             vm.SpelareOk = true;
                             vm.Fornamn = player.FirstName;
                             vm.Efternamn = player.LastName;
+                            vm.SpelareRegistrerad = SpelareRegistrerad(1, player.Id);
                         }
                         else // om inte i systemet kontrollera med PDGA
                         {
@@ -126,12 +127,30 @@ namespace DGTMVC4.Controllers
             return null;
         }
 
+        private bool SpelareRegistrerad(int competitionId, int playerId)
+        {
+            using (var session = NHibernateFactory.OpenSession())
+            {
+                var playerStatuses = session.QueryOver<PlayerStatus>().Where(ps => ps.Player.Id == playerId && ps.Competition.Id == competitionId).List<PlayerStatus>();
+                return playerStatuses.Count > 0;
+            }
+        }
+
+        public List<PlayerStatus> HamtaCompetitionPlayers(int id)
+        {
+            using (var session = NHibernateFactory.OpenSession())
+            {
+                var competition = session.Get<Competition>(id);
+
+                return competition != null ? competition.Players.ToList() : new List<PlayerStatus>();
+            }
+        }
+
         public Competition HamtaCompetition(int id)
         {
             using (var session = NHibernateFactory.OpenSession())
             {
                 var competition = session.Get<Competition>(id);
-                
 
                 return competition;
             }
@@ -143,15 +162,27 @@ namespace DGTMVC4.Controllers
             {
                 using (var transaction = session.BeginTransaction())
                 {
-                    var playerstatusModel = new PlayerStatus();
+
                     var player = HamtaPlayer(vm.PDGANummer);
                     var competition = HamtaCompetition(vm.TavlingsId);
+
                     if(player != null && competition != null)
                     {
-                        playerstatusModel.Competition = competition;
-                        playerstatusModel.Player = player;
-                        playerstatusModel.Status = NHibernate.Enums.PlayerCompetitionStatus.Registered;
-                        session.SaveOrUpdate(playerstatusModel);
+                        PlayerStatus playerStatus;
+                        var playerStatuses = session.QueryOver<PlayerStatus>().Where(ps => ps.Player.Id == player.Id && ps.Competition.Id == competition.Id).List<PlayerStatus>();
+                        if(playerStatuses.Count > 0)
+                        {
+                            playerStatus = playerStatuses[0];
+                        }
+                        else
+                        {
+                            playerStatus = new PlayerStatus();
+                        }
+
+                        playerStatus.Competition = competition;
+                        playerStatus.Player = player;
+                        playerStatus.Status = NHibernate.Enums.PlayerCompetitionStatus.Registered;
+                        session.SaveOrUpdate(playerStatus);
                         transaction.Commit();
                     }
                 }

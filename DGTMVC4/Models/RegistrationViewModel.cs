@@ -21,6 +21,7 @@ namespace DGTMVC4.Models
         public int SpelareId { get; set; }
         public bool SpelareOk { get; set; }
         public bool SpelareAnmald { get; set; }
+        public bool SpelareRegistrerad { get; set; }
 
         public string Meddelande { get; set; }
     }
