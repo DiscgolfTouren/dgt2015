@@ -11,7 +11,8 @@ namespace DGTMVC4.NHibernate.Mappings
              Map(x => x.Name);
              HasMany(x => x.Players)
                  .Inverse()
-                 .Cascade.All();
+                 .Cascade.All()
+                 .Not.LazyLoad();
              Map(x => x.Date);
              HasMany(x => x.Rounds)
                  .Inverse()

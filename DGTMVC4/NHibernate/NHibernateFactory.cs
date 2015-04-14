@@ -11,7 +11,7 @@ namespace DGTMVC4.NHibernate
     public class NHibernateFactory
     {
         private static ISessionFactory _sessionFactory;
-        private static string _database = "dgt";
+        private static string _database = "peterby_dgt";
 
         public static void SetDatabase(string database)
         {
