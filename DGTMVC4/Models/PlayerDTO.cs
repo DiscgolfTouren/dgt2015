@@ -11,5 +11,9 @@ namespace DGTMVC4.Models
         public string Namn { get; set; }
         public string Status { get; set; }
         public string Rating { get; set; }
+        public string PaddedRating 
+        {
+            get { return Rating.PadLeft(10, '0'); }
+        }
     }
 }

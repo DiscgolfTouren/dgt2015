@@ -19,13 +19,15 @@
                     <table class="table table-responsive">
                         <tr>
                             <th>pdga#</th>
-                            <th>Spelare</th>
+                            <th>Namn</th>
+                            <th>Rating</th>
                         </tr>
-                        @foreach (var player in Model.Competition.Players)
+                        @foreach (var player in Model.Competition.Players.OrderByDescending(p => p.PaddedRating))
                         {
                             <tr>
-                                <td>@player.Namn</td>
                                 <td>@player.PDGA</td>
+                                <td>@player.Namn</td>
+                                <td>@player.Rating</td>
                             </tr>
                         }
                     </table>
@@ -39,7 +41,7 @@
                             <th>Namn</th>
                             <th>Rating</th>
                         </tr>
-                        @foreach (var player in Model.Competition.RegisteredPlayers)
+                        @foreach (var player in Model.Competition.RegisteredPlayers.OrderByDescending(p => p.PaddedRating))
                         {
                             <tr>
                                 <td>@player.PDGA</td>
@@ -58,7 +60,7 @@
                             <th>Namn</th>
                             <th>Rating</th>
                         </tr>
-                        @foreach (var player in Model.Competition.WaitingPlayers)
+                        @foreach (var player in Model.Competition.WaitingPlayers.OrderByDescending(p => p.PaddedRating))
                         {
                             <tr>
                                 <td>@player.PDGA</td>
