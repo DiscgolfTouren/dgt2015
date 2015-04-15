@@ -43,6 +43,7 @@ namespace DGTMVC4.Controllers
 
         public ActionResult Tournaments()
         {
+
             return View();
         }
 

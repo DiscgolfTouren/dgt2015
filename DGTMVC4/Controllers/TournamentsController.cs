@@ -7,6 +7,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Configuration;
 using System.Web.Mvc;
+using NHibernate.Linq;
 
 namespace DGTMVC4.Controllers
 {
@@ -14,9 +15,81 @@ namespace DGTMVC4.Controllers
     {
         public ActionResult Tournament(int id = -1)
         {
-            ViewBag.Message = string.Format("Tävling: {0}", id);
+            var vm = new CompetitionsViewModel();
 
-            return View();
+            if(id != -1)
+            {
+                // hämta data för tävling
+                using(var session = NHibernateFactory.OpenSession())
+                {
+                    var competition = session.Get<Competition>(id);
+                    if(competition != null)
+                    {
+                        vm.Competition = new CompetitionDTO()
+                        {
+                            Id = competition.Id,
+                            Name = competition.Name,
+                            Date = competition.Date,
+                            PGDAWebPage = competition.PdgaWebPage,
+                            Description = competition.Description
+                        };
+
+                        var players = session.Query<PlayerStatus>().Where(p => p.Competition.Id == competition.Id);
+
+                        foreach (var player in players.Where(p => p.Status == NHibernate.Enums.PlayerCompetitionStatus.Payed))
+                        {
+                            vm.Competition.Players.Add(new PlayerDTO()
+                            {
+                                Namn = string.Format("{0} {1}", player.Player.FirstName, player.Player.LastName),
+                                PDGA = player.Player.PdgaNumber,
+                                Rating = player.Player.Rating
+                            });
+                        }
+
+                        foreach (var player in players.Where(p => p.Status == NHibernate.Enums.PlayerCompetitionStatus.Registered))
+                        {
+                            vm.Competition.RegisteredPlayers.Add(new PlayerDTO()
+                            {
+                                Namn = string.Format("{0} {1}", player.Player.FirstName, player.Player.LastName),
+                                PDGA = player.Player.PdgaNumber,
+                                Rating = player.Player.Rating
+                            });
+                        }
+
+                        foreach (var player in players.Where(p => p.Status == NHibernate.Enums.PlayerCompetitionStatus.Waiting))
+                        {
+                            vm.Competition.WaitingPlayers.Add(new PlayerDTO()
+                            {
+                                Namn = string.Format("{0} {1}", player.Player.FirstName, player.Player.LastName),
+                                PDGA = player.Player.PdgaNumber,
+                                Rating = player.Player.Rating
+                            });
+                        }
+                    }
+                }
+            }
+            else
+            {
+                // hämta data för tävlingar
+                var competitions = new List<Competition>();
+                using (var session = NHibernateFactory.OpenSession())
+                {
+                    competitions = session.Query<Competition>().ToList();
+                }
+                
+                foreach (var competition in competitions)
+                {
+                    var cp = new CompetitionDTO()
+                    {
+                        Id = competition.Id,
+                        Name = competition.Name,
+                        Date = competition.Date,
+                    };
+                    vm.Competitions.Add(cp);
+                }
+            }
+
+            return View(vm);
         }
 
         public ActionResult Registration(RegistrationViewModel vm, string registreraAnmalan, string kontrolleraPDGA)

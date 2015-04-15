@@ -15,7 +15,7 @@
         </p>
         <p>
             Då det under några säsonger blivit allt svårare att få en plats på tävlingar
-            t.ex. Nationella touren, SM har Discgolftouren som syfte att hjälpa sporten att växa
+            t.ex. Nationella touren och SM har Discgolftouren som syfte att hjälpa sporten att växa
             med ett tävlingsupplägg där det endast finns en klass och med ett rating minimikrav för att få deltaga.
         </p>
         <h3>Deltagare</h3>
@@ -61,15 +61,11 @@
                 </tr>
                 <tr>
                     <td>Start runda 2</td>
-                    <td>14:00</td>
+                    <td>14:30</td>
                 </tr>
                 <tr>
                     <td>Priscermoni</td>
-                    <td>efter avslutad tävling ca 16:45</td>
-                </tr>
-                <tr>
-                    <td>Tävlingen avslutad</td>
-                    <td>17:00</td>
+                    <td>efter avslutad tävling ca 17:00</td>
                 </tr>
                 <tr>
                     <td>Startsignal</td>
@@ -87,7 +83,7 @@
         <div class="list-group">
             @foreach (var comp in Model.Competitions)
             {
-                 <a class="list-group-item" href="/Tournaments/Tournament/@comp.Id;">@string.Format("{0} {1}", comp.Date.ToString("dd/M"), comp.Name)</a>
+                 <a class="list-group-item" href="/Tournaments/Tournament/@comp.Id">@string.Format("{0} {1}", comp.Date.ToString("dd/M"), comp.Name)</a>
             }
         </div>
 

@@ -10,6 +10,12 @@ namespace DGTMVC4.Models
             Competitions = new List<CompetitionDTO>();
         }
 
-        public List<CompetitionDTO> Competitions { get; set; } 
+        public List<CompetitionDTO> Competitions { get; set; }
+        public CompetitionDTO Competition { get; set; }
+
+        public bool ShowCompetition 
+        {
+            get { return Competition != null; }
+        }
     }
 }

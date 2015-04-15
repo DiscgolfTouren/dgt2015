@@ -1,12 +1,84 @@
-﻿@{
-    ViewBag.Title = "Tävling";
-}
-<div class="jumbotron">
+﻿@model DGTMVC4.Models.CompetitionsViewModel
 
-    <h1>Tävling</h1>
-    <p>@ViewBag.Message</p>
-    <p>Datum och namn</p>
-    <p>Länk till anmälan</p>
-    <p>Tid och Samlingsplats</p>
-    <p>Banbeskrivning</p>
+<div>
+    @if (Model.ShowCompetition)
+    {
+        <h2>@Model.Competition.Name</h2>
+        <div class="row">
+            <div class="col-md-6">
+                Datum: @Model.Competition.Date.ToString("yyyy-MM-dd")
+                <br />
+                <a href="@Model.Competition.PGDAWebPage" target="_blank">PDGA sidan</a>
+                <br />
+                @Model.Competition.Description
+            </div>
+            <div class="col-md-6">
+                @if (Model.Competition.Players.Any())
+                {
+                    <h3>Spelare</h3>
+                    <table class="table table-responsive">
+                        <tr>
+                            <th>pdga#</th>
+                            <th>Spelare</th>
+                        </tr>
+                        @foreach (var player in Model.Competition.Players)
+                        {
+                            <tr>
+                                <td>@player.Namn</td>
+                                <td>@player.PDGA</td>
+                            </tr>
+                        }
+                    </table>
+                }
+                @if (Model.Competition.RegisteredPlayers.Any())
+                {                <h3>Registrerade</h3>
+
+                    <table class="table table-responsive">
+                        <tr>
+                            <th>pdga#</th>
+                            <th>Namn</th>
+                            <th>Rating</th>
+                        </tr>
+                        @foreach (var player in Model.Competition.RegisteredPlayers)
+                        {
+                            <tr>
+                                <td>@player.PDGA</td>
+                                <td>@player.Namn</td>
+                                <td>@player.Rating</td>
+                            </tr>
+                        }
+                    </table>
+                }
+                @if (Model.Competition.WaitingPlayers.Any())
+                {
+                    <h3>Väntelista</h3>
+                    <table class="table table-responsive">
+                        <tr>
+                            <th>pdga#</th>
+                            <th>Namn</th>
+                            <th>Rating</th>
+                        </tr>
+                        @foreach (var player in Model.Competition.WaitingPlayers)
+                        {
+                            <tr>
+                                <td>@player.PDGA</td>
+                                <td>@player.Namn</td>
+                                <td>@player.Rating</td>
+                            </tr>
+                        }
+                    </table>
+                }
+            </div>
+        </div>
+    }
+    else
+    {
+        <h3>Tävlingar</h3>
+        <div class="list-group">
+            @foreach (var comp in Model.Competitions)
+            {
+                 <a class="list-group-item" href="/Tournaments/Tournament/@comp.Id">@string.Format("{0} {1}", comp.Date.ToString("dd/M"), comp.Name)</a>
+            }
+        </div>
+    }
 </div>
