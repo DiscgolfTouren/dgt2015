@@ -10,7 +10,7 @@
                 <br />
                 <a href="@Model.Competition.PGDAWebPage" target="_blank">PDGA sidan</a>
                 <br />
-                @Model.Competition.Description
+                @Html.Raw(Model.Competition.Description)
             </div>
             <div class="col-md-6">
                 @if (Model.Competition.Players.Any())
