@@ -21,8 +21,12 @@
         <h3>Deltagare</h3>
 
         <p>
-            Deltagare på DGT måste ha löst svensk licens för 2015
-            samt ha ett aktivt PDGA-medlemskap där man har som lägst 930 i rating.
+            Deltagare på DGT måste ha ett aktivt PDGA-medlemskap där man har som lägst 930 i rating.
+        </p>
+        <p>
+            Svenska spelare skall ha löst svensk licens för 2015.
+        </p>
+        <p>
             Om du har deltagit i en tävling på DGT 2015 och därefter sjunker i rating under 930
             får du ändå vara med på kommande deltävlingar under samma år.
         </p>
@@ -83,7 +87,7 @@
         <div class="list-group">
             @foreach (var comp in Model.Competitions)
             {
-                 <a class="list-group-item" href="/Tournaments/Tournament/@comp.Id">@string.Format("{0} {1}", comp.Date.ToString("dd/M"), comp.Name)</a>
+                <a class="list-group-item" href="/Tournaments/Tournament/@comp.Id">@string.Format("{0} {1}", comp.Date.ToString("dd/M"), comp.Name)</a>
             }
         </div>
 
