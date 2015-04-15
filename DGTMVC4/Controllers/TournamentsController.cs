@@ -110,7 +110,8 @@ namespace DGTMVC4.Controllers
                             vm.SpelareOk = true;
                             vm.Fornamn = player.FirstName;
                             vm.Efternamn = player.LastName;
-                            vm.SpelareRegistrerad = SpelareRegistrerad(1, player.Id);
+                            // todo tävling hårdkodad
+                            vm.SpelareRegistrerad = SpelareRegistrerad(2, player.Id);
                         }
                         else // om inte i systemet kontrollera med PDGA
                         {
