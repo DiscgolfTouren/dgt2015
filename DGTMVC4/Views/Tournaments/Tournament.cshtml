@@ -15,7 +15,7 @@
             <div class="col-md-6">
                 @if (Model.Competition.Players.Any())
                 {
-                    <h3>Spelare</h3>
+                    <h3>Spelare (@Model.Competition.Players.Count().ToString())</h3>
                     <table class="table table-responsive">
                         <tr>
                             <th>pdga#</th>
@@ -33,7 +33,7 @@
                     </table>
                 }
                 @if (Model.Competition.RegisteredPlayers.Any())
-                {                <h3>Registrerade</h3>
+                {                <h3>Registrerade (@Model.Competition.RegisteredPlayers.Count().ToString())</h3>
 
                     <table class="table table-responsive">
                         <tr>
@@ -53,7 +53,7 @@
                 }
                 @if (Model.Competition.WaitingPlayers.Any())
                 {
-                    <h3>Väntelista</h3>
+                    <h3>Väntelista (@Model.Competition.WaitingPlayers.Count().ToString())</h3>
                     <table class="table table-responsive">
                         <tr>
                             <th>pdga#</th>

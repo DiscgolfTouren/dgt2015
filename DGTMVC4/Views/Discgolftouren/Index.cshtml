@@ -87,7 +87,7 @@
         <div class="list-group">
             @foreach (var comp in Model.Competitions)
             {
-                <a class="list-group-item" href="/Tournaments/Tournament/@comp.Id">@string.Format("{0} {1}", comp.Date.ToString(@"dd/M"), comp.Name)</a>
+                <a class="list-group-item" href="/Tournaments/Tournament/@comp.Id">@string.Format("{0} {1}", comp.Date.ToString("dd/M"), comp.Name)</a>
             }
         </div>
 
