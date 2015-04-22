@@ -155,6 +155,7 @@
     <Compile Include="Integrations\PDGARest.cs" />
     <Compile Include="Models\CompetitionDTO.cs" />
     <Compile Include="Models\CompetitionsViewModel.cs" />
+    <Compile Include="Models\PlayerCompetitionDTO.cs" />
     <Compile Include="Models\PlayerDTO.cs" />
     <Compile Include="Models\RegistrationViewModel.cs" />
     <Compile Include="NHibernate\Enums\PlayerCompetitionStatus.cs" />

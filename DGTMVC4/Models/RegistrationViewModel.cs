@@ -24,5 +24,8 @@ namespace DGTMVC4.Models
         public bool SpelareRegistrerad { get; set; }
 
         public string Meddelande { get; set; }
+
+        public List<PlayerCompetitionDTO> Competitions { get; set; }
+        //public List<CompetitionDTO> Competitions { get; set; }
     }
 }

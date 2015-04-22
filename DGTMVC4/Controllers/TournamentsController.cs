@@ -108,10 +108,20 @@ namespace DGTMVC4.Controllers
                         if (player != null && player.RatingDate.Year == DateTime.Now.Year)
                         {
                             vm.SpelareOk = true;
+                            vm.SpelareId = player.Id;
                             vm.Fornamn = player.FirstName;
                             vm.Efternamn = player.LastName;
+
+
+
+
                             // todo tävling hårdkodad
                             vm.SpelareRegistrerad = SpelareRegistrerad(2, player.Id);
+
+
+
+
+
                         }
                         else // om inte i systemet kontrollera med PDGA
                         {
@@ -155,13 +165,51 @@ namespace DGTMVC4.Controllers
             else if (registreraAnmalan != null)
             {
                 // registrera anmälan
+
+
+
+
                 // todo när det finns mer än en tävling så har den förmodligen id != 2
                 vm.TavlingsId = 2;
+
+
+
                 RegistreraAnmalan(vm);
                 vm.SpelareAnmald = true;
             }
 
+            vm.Competitions = GetPlayerCompetitions(vm.SpelareId);
+
             return View(vm);
+        }
+
+        private List<PlayerCompetitionDTO> GetPlayerCompetitions(int spelareId)
+        {
+            var competitions = new List<Competition>();
+            using (var session = NHibernateFactory.OpenSession())
+            {
+                competitions = session.Query<Competition>().Where(c => c.Date.Year == DateTime.Now.Year).OrderBy(c => c.Date).ToList();
+            }
+
+            var playerCompetitons = new List<PlayerCompetitionDTO>();
+            foreach (var competition in competitions)
+            {
+                var pc = new PlayerCompetitionDTO()
+                {
+                    CompetitionId = competition.Id,
+                    CompetitionName = competition.Name,
+                    CompetitionDate = competition.Date
+                };
+                var player = competition.Players.Where(p => p.Player.Id == spelareId).ToList<PlayerStatus>();
+                if (player.Count() > 0)
+                {
+                    pc.PlayerStatus = player.First().Status;
+                }
+
+                playerCompetitons.Add(pc);
+            }
+
+            return playerCompetitons;
         }
 
         public ActionResult Result(int id = -1)
