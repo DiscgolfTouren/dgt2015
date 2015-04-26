@@ -111,17 +111,6 @@ namespace DGTMVC4.Controllers
                             vm.SpelareId = player.Id;
                             vm.Fornamn = player.FirstName;
                             vm.Efternamn = player.LastName;
-
-
-
-
-                            // todo tävling hårdkodad
-                            vm.SpelareRegistrerad = SpelareRegistrerad(2, player.Id);
-
-
-
-
-
                         }
                         else // om inte i systemet kontrollera med PDGA
                         {
@@ -166,16 +155,29 @@ namespace DGTMVC4.Controllers
             {
                 // registrera anmälan
 
-
-
-
-                // todo när det finns mer än en tävling så har den förmodligen id != 2
-                vm.TavlingsId = 2;
-
-
+                if(registreraAnmalan.Contains("1"))
+                {
+                    vm.TavlingsId = vm.Competitions[0].CompetitionId;
+                }
+                else if (registreraAnmalan.Contains("2"))
+                {
+                    vm.TavlingsId = vm.Competitions[1].CompetitionId;
+                }
+                else if (registreraAnmalan.Contains("3"))
+                {
+                    vm.TavlingsId = vm.Competitions[2].CompetitionId;
+                }
+                else if (registreraAnmalan.Contains("4"))
+                {
+                    vm.TavlingsId = vm.Competitions[3].CompetitionId;
+                }
+                else if (registreraAnmalan.Contains("5"))
+                {
+                    vm.TavlingsId = vm.Competitions[4].CompetitionId;
+                }
 
                 RegistreraAnmalan(vm);
-                vm.SpelareAnmald = true;
+                //vm.SpelareAnmald = true;
             }
 
             vm.Competitions = GetPlayerCompetitions(vm.SpelareId);
@@ -250,6 +252,22 @@ namespace DGTMVC4.Controllers
             return null;
         }
 
+        public Player HamtaPlayer(long spelareId)
+        {
+            using (var session = NHibernateFactory.OpenSession())
+            {
+                var players = session.QueryOver<Player>().Where(p => p.Id == spelareId).List<Player>();
+                if (players.Count > 0)
+                {
+                    return players[0];
+                }
+            }
+
+            return null;
+        }
+
+
+
         private bool SpelareRegistrerad(int competitionId, int playerId)
         {
             using (var session = NHibernateFactory.OpenSession())
@@ -286,7 +304,7 @@ namespace DGTMVC4.Controllers
                 using (var transaction = session.BeginTransaction())
                 {
 
-                    var player = HamtaPlayer(vm.PDGANummer);
+                    var player = HamtaPlayer(vm.SpelareId);
                     var competition = HamtaCompetition(vm.TavlingsId);
 
                     if(player != null && competition != null)

@@ -152,6 +152,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\FormatHelper.cs" />
     <Compile Include="Integrations\PDGARest.cs" />
     <Compile Include="Models\CompetitionDTO.cs" />
     <Compile Include="Models\CompetitionsViewModel.cs" />

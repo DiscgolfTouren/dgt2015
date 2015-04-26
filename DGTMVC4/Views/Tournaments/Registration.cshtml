@@ -21,7 +21,6 @@
     <div class="col-md-6">
         <h3>Steg 1 - kontrollera rating</h3>
         <p>
-            <a href="~/Resources/CaddyBook_Ultuna_2014.pdf">Caddiebok</a>
             Ange pdga nummer och kontrollera om du har tillräcklig rating för att kunna anmäla dig.
         </p>
         <h3>Steg 2 - anmälan</h3>
@@ -50,15 +49,11 @@
 <div class="jumbotron">
     @using (Html.BeginForm())
     {
-        @Html.Hidden("SpelareOk")
-        @*@Html.Hidden("SpelareRegistrerad")
-            @Html.Hidden("SpelareAnmald")
-            @Html.Hidden("PDGANummer")
-            @Html.Hidden("Fornamn")
-            @Html.Hidden("Efternamn")*@
+
 
         if (!Model.SpelareOk)
         {
+
             <p>
                 @if (Model.Meddelande != null)
                 {
@@ -74,92 +69,74 @@
         }
         else
         {
-            <div class="col-md-5">
+            @Html.Label(string.Format("Spelare: {0} {1} #{2}", Model.Fornamn, Model.Efternamn, Model.PDGANummer))
+            <br />
+            <br />
+            <table class="table table-striped">
 
-                <table class="table table-striped">
+                @Html.HiddenFor(m => m.SpelareOk)
+                @Html.HiddenFor(m => m.SpelareId)
+                @Html.HiddenFor(m => m.Fornamn)
+                @Html.HiddenFor(m => m.Efternamn)
+                @Html.HiddenFor(m => m.PDGANummer)
+                <thead>
+                    <tr>
+                        <th>
+                            Datum
+                        </th>
+                        <th>
+                            Tävling
+                        </th>
+                        <th>
+                            Status
+                        </th>
+                    </tr>
+                </thead>
 
-@*                    @foreach (var competition in Model.Competitions)*@
-                    @for(int i = 0; i<Model.Competitions.Count(); i++)
-                    {
+                @for (int i = 0; i < Model.Competitions.Count(); i++)
+                {
+                    @Html.HiddenFor(m => m.Competitions[i].CompetitionId)
+                    @Html.HiddenFor(m => m.Competitions[i].CompetitionDate)
+                    @Html.HiddenFor(m => m.Competitions[i].CompetitionName)
+                    @Html.HiddenFor(m => m.Competitions[i].PlayerStatus)
                     <tr>
                         <td>
-                            @Html.Label(string.Format("{0}  DGT {1} {2}", Model.Competitions[i].CompetitionDate.ToString("d/MM"), i + 1, Model.Competitions[i].CompetitionName))
+                            @Html.Label(DGTMVC4.Helpers.FormatHelper.GetDayMonth(Model.Competitions[i].CompetitionDate))
 
-
-                            @if (Model.Competitions[i].PlayerStatus == DGTMVC4.NHibernate.Enums.PlayerCompetitionStatus.Payed) // har plats
+                        </td>
+                        <td>
+                            @Html.Label(string.Format("DGT {0} {1}", i + 1, Model.Competitions[i].CompetitionName))
+                        </td>
+                        <td>
+                            @if (Model.Competitions[i].CompetitionDate < DateTime.Now)
                             {
-                            @Html.Label("Har plats")
+                                @Html.Label("Anmälan är stängd");
+                            }
+                            else if (Model.Competitions[i].PlayerStatus == DGTMVC4.NHibernate.Enums.PlayerCompetitionStatus.Payed) // har plats
+                            {
+                                @Html.Label("Har plats")
                             }
                             else if (Model.Competitions[i].PlayerStatus == DGTMVC4.NHibernate.Enums.PlayerCompetitionStatus.Waiting) // väntelista
                             {
-                            @Html.Label("Väntelistan")
+                                @Html.Label("Väntelistan")
                             }
                             else if (Model.Competitions[i].PlayerStatus == DGTMVC4.NHibernate.Enums.PlayerCompetitionStatus.Registered) // Betalning saknas
                             {
-                            @Html.Label("Anmäld, betalning saknas")
+                                @Html.Label("Anmäld, betalning saknas")
                             }
                             else if (Model.Competitions[i].CompetitionDate.AddDays(-60) < DateTime.Now && Model.Competitions[i].PlayerStatus == null)
                             {
-                            <input type="submit" name="RegistreraAnmalan" value="Registrera anmälan för DGT @{(i + 1).ToString()}" />
+                                <input type="submit" name="RegistreraAnmalan" value="Registrera anmälan för DGT @((i + 1).ToString()) " />
+                            }
+                            else if (Model.Competitions[i].CompetitionDate.AddDays(-60) >= DateTime.Now)
+                            {
+                                @Html.Label(string.Format("Anmälan öppnas {0}", DGTMVC4.Helpers.FormatHelper.GetDayMonth(Model.Competitions[i].CompetitionDate.AddDays(-60))));
                             }
                         </td>
                     </tr>
-                    }
+                }
 
-                </table>
-            </div>
+            </table>
         }
     }
-    @*if (Model.SpelareRegistrerad)
-        {
-            @Html.Hidden("SpelareRegistrerad")
-            <p>
-                @string.Format("Spelare: {0} {1} #{2} är registrerad till Ultuna", Model.Fornamn, Model.Efternamn, Model.PDGANummer)
-            </p>
-        }
-        else
-        {
-            if (!Model.SpelareOk && !Model.SpelareAnmald)
-            {
-                <p>
-                    @if (Model.Meddelande != null)
-                    {
-                        @Html.Label(Model.Meddelande);
-                        <br />
-                        <br />
-
-                    }
-                    @Html.Label("Ange ditt PDGA nummer")<br />
-                    @Html.TextBox("PDGANummer")
-                    <input type="submit" name="kontrolleraPDGA" value="Kontrollera PDGA nummer" />
-                </p>
-            }
-            else if (Model.SpelareOk && !Model.SpelareAnmald)
-            {
-                <p>
-                    @Html.Hidden("SpelareOk")
-                    @Html.Hidden("PDGANummer")
-                    @Html.Hidden("Fornamn")
-                    @Html.Hidden("Efternamn")
-
-                    @string.Format("Spelare: {0} {1} #{2} ", Model.Fornamn, Model.Efternamn, Model.PDGANummer)
-                    <br />
-                    <br />
-                    Vill du anmäla dig till DGT 1 Ultuna ?&nbsp;&nbsp;
-                    <input type="submit" name="RegistreraAnmalan" value="Registrera anmälan" />
-                </p>
-            }
-            else if (Model.SpelareOk && Model.SpelareAnmald)
-            {
-                <p>
-                    @Html.Hidden("SpelareOk")
-                    @Html.Hidden("SpelareAnmald")
-                    @Html.Hidden("PDGANummer")
-                    @Html.Hidden("Fornamn")
-                    @Html.Hidden("Efternamn")
-
-                    @string.Format("Spelare: {0} {1} #{2} är anmäld", Model.Fornamn, Model.Efternamn, Model.PDGANummer)
-                </p>
-            }
-        }*@
 </div>
