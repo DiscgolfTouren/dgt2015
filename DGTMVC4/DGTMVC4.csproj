@@ -246,6 +246,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <None Include="Properties\PublishProfiles\DGTMVC4.pubxml" />
+    <Content Include="Resources\bankarta_2015_visattra.jpg" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
     <Content Include="Resources\CaddyBook_Ultuna_2014.pdf" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
