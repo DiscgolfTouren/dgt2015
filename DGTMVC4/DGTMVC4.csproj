@@ -159,6 +159,7 @@
     <Compile Include="Models\PlayerCompetitionDTO.cs" />
     <Compile Include="Models\PlayerDTO.cs" />
     <Compile Include="Models\RegistrationViewModel.cs" />
+    <Compile Include="Models\StandingsViewModel.cs" />
     <Compile Include="NHibernate\Enums\PlayerCompetitionStatus.cs" />
     <Compile Include="NHibernate\Mappings\CompetitionMap.cs" />
     <Compile Include="NHibernate\Mappings\CourseconfigurationMap.cs" />

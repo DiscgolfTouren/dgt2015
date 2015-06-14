@@ -1,8 +1,50 @@
-﻿@{
-    ViewBag.Title = "Tabell";
-}
+﻿@model DGTMVC4.Models.StandingsViewModel
 
-<div class="jumbotron">
 
-    <h1>Tabell</h1>
+<div>
+    <table class="table table-bordered">
+        <tr>
+            <th colspan="4">Spelare</th>
+            <th colspan="2">Ulltuna</th>
+            <th colspan="2">Visättra</th>
+            <th colspan="2">Eskilstuna</th>
+            <th colspan="2">Lillsjön</th>
+            <th colspan="2">Åkersberga</th>
+        </tr>
+        <tr>
+            <th>#</th>
+            <th>Namn</th>
+            <th>PDGA#</th>
+            <th>Poäng</th>
+            <th>#</th>
+            <th>P</th>
+            <th>#</th>
+            <th>P</th>
+            <th>#</th>
+            <th>P</th>
+            <th>#</th>
+            <th>P</th>
+            <th>#</th>
+            <th>P</th>
+        </tr>
+        @foreach (var player in Model.Standings.OrderBy(s => s.Placering))
+        {
+            <tr>
+                <td>@player.Placering</td>
+                <td>@player.Namn</td>
+                <td>@player.PDGA</td>
+                <td>@player.TotalPoang</td>
+                <td>@player.DGT1Placering</td>
+                <td>@player.DGT1Poang</td>
+                <td>@player.DGT2Placering</td>
+                <td>@player.DGT2Poang</td>
+                <td>@player.DGT3Placering</td>
+                <td>@player.DGT3Poang</td>
+                <td>@player.DGT4Placering</td>
+                <td>@player.DGT4Poang</td>
+                <td>@player.DGT5Placering</td>
+                <td>@player.DGT5Poang</td>
+            </tr>
+        }
+    </table>
 </div>
