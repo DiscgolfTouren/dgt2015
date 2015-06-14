@@ -169,6 +169,7 @@
     <Compile Include="NHibernate\Mappings\PlayerResultMap.cs" />
     <Compile Include="NHibernate\Mappings\PlayerStatusMap.cs" />
     <Compile Include="NHibernate\Mappings\RoundMap.cs" />
+    <Compile Include="NHibernate\Mappings\StandingMap.cs" />
     <Compile Include="NHibernate\Mappings\TourMap.cs" />
     <Compile Include="NHibernate\Models\Competition.cs" />
     <Compile Include="NHibernate\Models\Courseconfiguration.cs" />
@@ -178,6 +179,7 @@
     <Compile Include="NHibernate\Models\PlayerResult.cs" />
     <Compile Include="NHibernate\Models\PlayerStatus.cs" />
     <Compile Include="NHibernate\Models\Round.cs" />
+    <Compile Include="NHibernate\Models\Standing.cs" />
     <Compile Include="NHibernate\Models\Tour.cs" />
     <Compile Include="NHibernate\NHibernateFactory.cs" />
     <Compile Include="NHibernate\NHibernateFactoryTest.cs" />

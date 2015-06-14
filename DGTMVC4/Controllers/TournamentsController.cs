@@ -225,6 +225,36 @@ namespace DGTMVC4.Controllers
         {
             var vm = new StandingsViewModel();
 
+            // hämta data för tabell
+            var standings = new List<Standing>();
+            using (var session = NHibernateFactory.OpenSession())
+            {
+                standings = session.Query<Standing>().ToList();
+            }
+
+            foreach (var standing in standings)
+            {
+                var s = new StandingPlayerDTO()
+                {
+                    Placering = standing.Place,
+                    Namn = string.Format("{0} {1}", standing.Player.FirstName, standing.Player.LastName),
+                    PDGA = standing.Player.PdgaNumber,
+                    TotalPoang = standing.TotalPoints,
+                    DGT1Placering = standing.DGT1Place,
+                    DGT1Poang = standing.DGT1Points,
+                    DGT2Placering = standing.DGT2Place,
+                    DGT2Poang = standing.DGT2Points,
+                    DGT3Placering = standing.DGT3Place,
+                    DGT3Poang = standing.DGT3Points,
+                    DGT4Placering = standing.DGT4Place,
+                    DGT4Poang = standing.DGT4Points,
+                    DGT5Placering = standing.DGT5Place,
+                    DGT5Poang = standing.DGT5Points
+                };
+                vm.Standings.Add(s);
+            }
+
+
             for (int i = 0; i < 30; i++)
             {
                 vm.Standings.Add(new StandingPlayerDTO()
