@@ -15,6 +15,7 @@ namespace DGTMVC4.NHibernate.Mappings
             Map(c => c.Place);
             References(c => c.Player).Not.LazyLoad();
             Map(c => c.Year);
+            Map(c => c.TotalPoints);
             Map(c => c.DGT1Place);
             Map(c => c.DGT1Points);
             Map(c => c.DGT2Place);
