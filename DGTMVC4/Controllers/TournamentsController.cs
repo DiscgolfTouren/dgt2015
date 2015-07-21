@@ -255,26 +255,26 @@ namespace DGTMVC4.Controllers
             }
 
 
-            for (int i = 0; i < 30; i++)
-            {
-                vm.Standings.Add(new StandingPlayerDTO()
-                {
-                    Placering = 30-i,
-                    Namn = "Peter Bygde",
-                    PDGA = "8558",
-                    TotalPoang = i + 23,
-                    DGT1Placering = 23,
-                    DGT1Poang = 12,
-                    DGT2Placering = 23,
-                    DGT2Poang = 12,
-                    DGT3Placering = 23,
-                    DGT3Poang = 12,
-                    DGT4Placering = 23,
-                    DGT4Poang = 12,
-                    DGT5Placering = 23,
-                    DGT5Poang = 12
-                });
-            }
+            //for (int i = 0; i < 30; i++)
+            //{
+            //    vm.Standings.Add(new StandingPlayerDTO()
+            //    {
+            //        Placering = 30-i,
+            //        Namn = "Peter Bygde",
+            //        PDGA = "8558",
+            //        TotalPoang = i + 23,
+            //        DGT1Placering = 23,
+            //        DGT1Poang = 12,
+            //        DGT2Placering = 23,
+            //        DGT2Poang = 12,
+            //        DGT3Placering = 23,
+            //        DGT3Poang = 12,
+            //        DGT4Placering = 23,
+            //        DGT4Poang = 12,
+            //        DGT5Placering = 23,
+            //        DGT5Poang = 12
+            //    });
+            //}
 
             return View(vm);
         }
