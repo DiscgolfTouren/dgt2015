@@ -10,5 +10,7 @@ namespace DGTMVC4.Models
         public string Indata { get; set; }
         public string  Utdata { get; set; }
         public List<AdminResult> AdminResults { get; set; }
+        public int tournamentId { get; set; }
+        public bool ResultsOk { get; set; }
     }
 }

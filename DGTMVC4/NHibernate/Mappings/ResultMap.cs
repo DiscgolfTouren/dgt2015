@@ -13,6 +13,7 @@ namespace DGTMVC4.NHibernate.Mappings
             Map(c => c.Place);
             Map(c => c.R1);
             Map(c => c.R2);
+            Map(c => c.Total);
         }
     }
 }

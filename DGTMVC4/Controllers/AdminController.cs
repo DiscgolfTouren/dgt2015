@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using DGTMVC4.Enum;
 using DGTMVC4.Models;
 using FluentNHibernate.Conventions;
 
@@ -20,7 +21,7 @@ namespace DGTMVC4.Controllers
             return View();
         }
 
-        public ActionResult Results(AdminResultsViewModel vm, string tolkaInput)
+        public ActionResult Results(AdminResultsViewModel vm, string tolkaInput, string uppdateraTournament)
         {
             if (tolkaInput != null)
             {
@@ -28,7 +29,36 @@ namespace DGTMVC4.Controllers
                 vm.AdminResults = results;
                 vm.Utdata = string.Format("{0}", results.Count);
             }
+
+            if (uppdateraTournament != null)
+            {
+                if (vm.tournamentId != -1)
+                {
+                    var results = TolkaInput(vm.Indata);
+
+                    if (ResultsOk(results))
+                    {
+                        //    ta bort alla gamla resultat för tävlingen
+
+                        foreach (var r in results)
+                        {
+                            //       skapa nya poster
+                            //       spara dessa
+                        }
+                    }
+                    else
+                    {
+                        vm.ResultsOk = false;
+                    }
+                }
+            }
+
             return View(vm);
+        }
+
+        private bool ResultsOk(List<AdminResult> results)
+        {
+            return results.All(r => r.Status == AdminResultStatus.Ok);
         }
 
         private List<AdminResult> TolkaInput(string input)
