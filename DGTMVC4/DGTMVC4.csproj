@@ -142,23 +142,28 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AdminResultStatus.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\DiscgolftourenController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\TournamentsController.cs" />
+    <Compile Include="Enum\AdminResultStatus.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\FormatHelper.cs" />
     <Compile Include="Integrations\PDGARest.cs" />
+    <Compile Include="Models\AdminResultsViewModel.cs" />
     <Compile Include="Models\CompetitionDTO.cs" />
     <Compile Include="Models\CompetitionsViewModel.cs" />
     <Compile Include="Models\PlayerCompetitionDTO.cs" />
     <Compile Include="Models\PlayerDTO.cs" />
     <Compile Include="Models\RegistrationViewModel.cs" />
+    <Compile Include="Models\AdminResult.cs" />
     <Compile Include="Models\StandingsViewModel.cs" />
     <Compile Include="NHibernate\Enums\PlayerCompetitionStatus.cs" />
     <Compile Include="NHibernate\Mappings\CompetitionMap.cs" />
@@ -168,6 +173,7 @@
     <Compile Include="NHibernate\Mappings\PlayerMap.cs" />
     <Compile Include="NHibernate\Mappings\PlayerResultMap.cs" />
     <Compile Include="NHibernate\Mappings\PlayerStatusMap.cs" />
+    <Compile Include="NHibernate\Mappings\ResultMap.cs" />
     <Compile Include="NHibernate\Mappings\RoundMap.cs" />
     <Compile Include="NHibernate\Mappings\StandingMap.cs" />
     <Compile Include="NHibernate\Mappings\TourMap.cs" />
@@ -178,6 +184,7 @@
     <Compile Include="NHibernate\Models\Player.cs" />
     <Compile Include="NHibernate\Models\PlayerResult.cs" />
     <Compile Include="NHibernate\Models\PlayerStatus.cs" />
+    <Compile Include="NHibernate\Models\Result.cs" />
     <Compile Include="NHibernate\Models\Round.cs" />
     <Compile Include="NHibernate\Models\Standing.cs" />
     <Compile Include="NHibernate\Models\Tour.cs" />
@@ -293,6 +300,7 @@
     <Content Include="Views\Tournaments\Result.cshtml" />
     <Content Include="Views\Discgolftouren\Hur.cshtml" />
     <Content Include="Views\Tournaments\Standings.cshtml" />
+    <Content Include="Views\Admin\Results.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
