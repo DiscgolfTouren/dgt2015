@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
-namespace DGTMVC4.NHibernate.Models
+﻿namespace DGTMVC4.NHibernate.Models
 {
     public class Standing
     {

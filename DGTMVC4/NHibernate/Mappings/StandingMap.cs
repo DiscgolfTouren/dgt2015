@@ -1,9 +1,5 @@
 ﻿using DGTMVC4.NHibernate.Models;
 using FluentNHibernate.Mapping;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 
 namespace DGTMVC4.NHibernate.Mappings
 {
