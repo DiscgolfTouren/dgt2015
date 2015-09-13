@@ -27,14 +27,10 @@
             if (Model.AdminResults != null)
             {
                 @Html.Label("Välj tävling att uppdatera")
-                var tournaments = new SelectList(new List<SelectListItem>
-                {
-                    new SelectListItem {Selected = true, Text = string.Empty, Value = "-1"},
-                    new SelectListItem {Selected = false, Text = "t1", Value = "1"},
-                    new SelectListItem {Selected = false, Text = "t2", Value = "2"}
-                }, "Value", "Text", -1);
-                @Html.DropDownListFor(t => t.tournamentId, tournaments)
-                <input type="submit" name="uppdateraTournament" value="Uppdatera tävling"/>
+                var competitions = new SelectList(Model.Competitions, "Value", "Text", -1);
+                @Html.DropDownListFor(t => t.tournamentId, competitions);
+                
+                <input type="submit" name="uppdateraTournament" value="Uppdatera tävling" />
                 <table class="table table-bordered">
                     <tr>
                         <th>#</th>

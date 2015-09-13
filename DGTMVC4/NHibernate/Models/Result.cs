@@ -9,5 +9,6 @@
         public virtual int R1 { get; set; }
         public virtual int R2 { get; set; }
         public virtual int Total { get; set; }
+        public virtual double Points { get; set; }
     }
 }
