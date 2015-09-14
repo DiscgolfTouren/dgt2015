@@ -25,17 +25,17 @@ namespace DGTMVC4.Controllers
             return View();
         }
 
-        public ActionResult Results(AdminResultsViewModel vm, string tolkaInput, string uppdateraTournament)
+        public ActionResult Results(AdminResultsViewModel vm, string tolkaInput, string uppdateraTournament, string uppdateraStandings)
         {
             // Init
-            if(vm.Competitions == null)
+            if (vm.Competitions == null)
             {
                 var competitons = GetCompetitions();
 
                 var ddlCompetitions = new List<SelectListItem>();
                 ddlCompetitions.Add(new SelectListItem { Text = "Välj en tävling", Value = "-1", Selected = true });
 
-                foreach(var c in competitons)
+                foreach (var c in competitons)
                 {
                     ddlCompetitions.Add(new SelectListItem { Text = c.Name, Value = c.Id.ToString() });
                 }
@@ -48,6 +48,11 @@ namespace DGTMVC4.Controllers
                 var results = TolkaInput(vm.Indata);
                 vm.AdminResults = results;
                 vm.Utdata = string.Format("{0}", results.Count);
+            }
+
+            if (uppdateraStandings != null)
+            {
+                UpdateStandings();
             }
 
             if (uppdateraTournament != null)
@@ -80,13 +85,199 @@ namespace DGTMVC4.Controllers
             return View(vm);
         }
 
+        private void UpdateStandings()
+        {
+            int year = DateTime.Now.Year;
+
+            DeleteStandings(year);
+
+            using (var session = NHibernateFactory.OpenSession())
+            {
+
+                var results = session.Query<Result>().Where(r => r.Competition.Date.Year == year).OrderBy(r => r.Competition).OrderBy(r => r.Place);
+                var competitions = session.Query<Competition>().Where(c => c.Date.Year == year);
+
+                // hämta lista med tävlingar
+                // för varje tävling
+                //   för varje spelare
+                //     räkna ut poäng
+                foreach (var competition in competitions)
+                {
+                    var numberOfPlayers = results.Count(r => r.Competition == competition);
+                    var competitionResults = results.Where(r => r.Competition == competition);
+                    foreach (var cr in competitionResults)
+                    {
+                        var samePlace = competitionResults.Where(c => c.Place == cr.Place).Count();
+                        cr.Points = CalculatePoints(numberOfPlayers, cr.Place, samePlace);
+                    }
+                }
+
+                var standings = session.Query<Standing>();
+                foreach (var result in results)
+                {
+                    var standing = standings.FirstOrDefault(s => s.Player == result.Player);
+                    if (standing == null)
+                    {
+                        // new
+                        standing = new Standing
+                        {
+                            Year = year,
+                            Player = result.Player
+                        };
+
+                        UpdatePlacePoints(standing, result, competitions);
+                        session.Save(standing);
+                    }
+                    else
+                    {
+                        // update
+                        UpdatePlacePoints(standing, result, competitions);
+                    }
+                }
+
+                foreach (var standing in standings)
+                {
+                    CalculateTotalPoints(standing);
+                }
+
+                // sortera efter division och points desc
+                // en räknare
+                // om nästa har ny division sätt index till 1
+                // annars om nästa har lägre poäng
+                //    sätt räknaren lika med index
+                //    öka räknaren med 1
+                // öka index med 1
+                var standingsAddPlace = standings.OrderByDescending(s => s.TotalPoints);
+
+                int i = 0;
+                int index = 0;
+                double points = 501.0;
+                foreach(var standing in standingsAddPlace)
+                {
+                    i++;
+                    if(standing.TotalPoints < points)
+                    {
+                        index = i;
+                    }
+
+                    standing.Place = index;
+                }
+
+                session.Flush();
+
+            }
+
+
+        }
+
+        private void CalculateTotalPoints(Standing standing)
+        {
+            List<double> points = new List<double>();
+            if (standing.DGT1Points != null) { points.Add(standing.DGT1Points); }
+            if (standing.DGT2Points != null) { points.Add(standing.DGT2Points); }
+            if (standing.DGT3Points != null) { points.Add(standing.DGT3Points); }
+            if (standing.DGT4Points != null) { points.Add(standing.DGT4Points); }
+            if (standing.DGT5Points != null) { points.Add(standing.DGT5Points); }
+
+            double min = 0.0;
+
+            if(points.Count > 4)
+            {
+                min = 100.0;
+                foreach(var p in points)
+                {
+                    if(p < min)
+                    {
+                        min = p;
+                    }
+                }
+            }
+
+            double totalPoints = points.Sum() - min;
+
+            standing.TotalPoints = totalPoints;
+        }
+
+        private void UpdatePlacePoints(Standing standing, Result result, IQueryable<Competition> competitions)
+        {
+            int i = 0;
+            foreach (var c in competitions.OrderBy(c => c.Date))
+            {
+                i++;
+                if (c == result.Competition)
+                {
+                    break;
+                }
+            }
+
+            switch (i)
+            {
+                case 1:
+                    standing.DGT1Place = result.Place;
+                    standing.DGT1Points = result.Points;
+                    break;
+                case 2:
+                    standing.DGT2Place = result.Place;
+                    standing.DGT2Points = result.Points;
+                    break;
+                case 3:
+                    standing.DGT3Place = result.Place;
+                    standing.DGT3Points = result.Points;
+                    break;
+                case 4:
+                    standing.DGT4Place = result.Place;
+                    standing.DGT4Points = result.Points;
+                    break;
+                case 5:
+                    standing.DGT5Place = result.Place;
+                    standing.DGT5Points = result.Points;
+                    break;
+            }
+        }
+
+
+        private double CalculatePoints(int numberOfPlayers, int place, int samePlace)
+        {
+            double points = 0.0;
+            for (int i = place; i < place + samePlace; i++)
+            {
+                points += CalculatePoints(numberOfPlayers, i);
+            }
+
+            return points / samePlace;
+        }
+
+        private double CalculatePoints(int numberOfPlayers, int place)
+        {
+            if (place < 11)
+            {
+                return 100 + 1 - place;
+            }
+            else
+            {
+                double diff = 91.0 / (numberOfPlayers - 9);
+                double points = 91.0 - (place - 10) * diff;
+                return points;
+            }
+        }
+
+        private void CalculatePlace()
+        {
+            throw new NotImplementedException();
+        }
+
+        private void CalculateTotalPoints()
+        {
+            throw new NotImplementedException();
+        }
+
         private List<CompetitionDTO> GetCompetitions()
         {
             var dtos = new List<CompetitionDTO>();
             using (var session = NHibernateFactory.OpenSession())
             {
                 var competitions = session.Query<Competition>().Where(c => c.Date.Year == DateTime.Now.Year).ToList();
-                foreach(var c in competitions)
+                foreach (var c in competitions)
                 {
                     dtos.Add(new CompetitionDTO()
                     {
@@ -136,7 +327,7 @@ namespace DGTMVC4.Controllers
 
                 }
 
-                if(player == null)
+                if (player == null)
                 {
                     return;
                 }
@@ -172,6 +363,22 @@ namespace DGTMVC4.Controllers
             }
         }
 
+        private void DeleteStandings(int year)
+        {
+            using (var session = NHibernateFactory.OpenSession())
+            {
+                var standings = session.QueryOver<Standing>().Where(s => s.Year == year).List<Standing>();
+                foreach (var s in standings)
+                {
+                    session.Delete(s);
+                }
+
+                session.Flush();
+            }
+        }
+
+
+
         private List<AdminResult> TolkaInput(string input)
         {
             var results = new List<AdminResult>();
@@ -201,7 +408,7 @@ namespace DGTMVC4.Controllers
                         Total = GetValue(line, total)
                     };
 
-                    if(result.Total.ToUpper() == "DNF")
+                    if (result.Total.ToUpper() == "DNF")
                     {
                         result.Total = "-1";
                     }
