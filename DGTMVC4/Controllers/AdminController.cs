@@ -147,7 +147,7 @@ namespace DGTMVC4.Controllers
                 //    sätt räknaren lika med index
                 //    öka räknaren med 1
                 // öka index med 1
-                var standingsAddPlace = standings.OrderByDescending(s => s.TotalPoints);
+                var standingsAddPlace = standings.ToList().OrderByDescending(s => s.TotalPoints);
 
                 int i = 0;
                 int index = 0;
@@ -155,9 +155,10 @@ namespace DGTMVC4.Controllers
                 foreach(var standing in standingsAddPlace)
                 {
                     i++;
-                    if(standing.TotalPoints < points)
+                    if(Math.Round(standing.TotalPoints, 2) < Math.Round(points, 2))
                     {
                         index = i;
+                        points = standing.TotalPoints;
                     }
 
                     standing.Place = index;
