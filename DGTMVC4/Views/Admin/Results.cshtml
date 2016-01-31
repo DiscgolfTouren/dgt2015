@@ -18,7 +18,9 @@
         {
             @Html.Label("Klistra in resultat från PDGA eller annan källa")<br />
             @Html.TextAreaFor(model => model.Indata, new { rows = "20", cols = "80" })<br />
-            <input type="submit" name="tolkaInput" value="Tolka" /><br /><br />
+            <input type="submit" name="tolkaInput" value="Tolka" />
+            <input type="submit" name="uppdateraStandings" value="UppdateraStandings" />
+            <br /><br />
             if (Model.Utdata != null)
             {
                 @Html.Label(Model.Utdata)
@@ -27,35 +29,31 @@
             if (Model.AdminResults != null)
             {
                 @Html.Label("Välj tävling att uppdatera")
-                var tournaments = new SelectList(new List<SelectListItem>
+                var competitions = new SelectList(Model.Competitions, "Value", "Text", -1);
+                @Html.DropDownListFor(t => t.tournamentId, competitions);
+
+            <input type="submit" name="uppdateraTournament" value="Uppdatera tävling" />
+            <table class="table table-bordered">
+                <tr>
+                    <th>#</th>
+                    <th>Namn</th>
+                    <th>PDGA#</th>
+                    <th>R1</th>
+                    <th>R2</th>
+                    <th>Totalt</th>
+                </tr>
+                @foreach (var result in Model.AdminResults)
                 {
-                    new SelectListItem {Selected = true, Text = string.Empty, Value = "-1"},
-                    new SelectListItem {Selected = false, Text = "t1", Value = "1"},
-                    new SelectListItem {Selected = false, Text = "t2", Value = "2"}
-                }, "Value", "Text", -1);
-                @Html.DropDownListFor(t => t.tournamentId, tournaments)
-                <input type="submit" name="uppdateraTournament" value="Uppdatera tävling"/>
-                <table class="table table-bordered">
                     <tr>
-                        <th>#</th>
-                        <th>Namn</th>
-                        <th>PDGA#</th>
-                        <th>R1</th>
-                        <th>R2</th>
-                        <th>Totalt</th>
+                        <td>@result.Place</td>
+                        <td>@result.Name</td>
+                        <td>@result.PDGA</td>
+                        <td>@result.R1</td>
+                        <td>@result.R2</td>
+                        <td>@result.Total</td>
                     </tr>
-                    @foreach (var result in Model.AdminResults)
-                    {
-                        <tr>
-                            <td>@result.Place</td>
-                            <td>@result.Name</td>
-                            <td>@result.PDGA</td>
-                            <td>@result.R1</td>
-                            <td>@result.R2</td>
-                            <td>@result.Total</td>
-                        </tr>
-                    }
-                </table>
+                }
+            </table>
             }
         }
     </div>

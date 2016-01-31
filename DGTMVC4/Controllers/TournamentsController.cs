@@ -255,6 +255,7 @@ namespace DGTMVC4.Controllers
             }
 
 
+            // Debug - test ...
             //for (int i = 0; i < 30; i++)
             //{
             //    vm.Standings.Add(new StandingPlayerDTO()
