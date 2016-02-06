@@ -20,7 +20,7 @@ namespace DGTMVC4.Controllers
             var competitions = new List<Competition>();
             using (var session = NHibernateFactory.OpenSession())
             {
-                competitions = session.Query<Competition>().ToList();
+                competitions = session.Query<Competition>().Where(c => c.Date.Year == DateTime.Now.Year).OrderBy(c => c.Date).ToList();
             }
             foreach (var competition in competitions)
             {
