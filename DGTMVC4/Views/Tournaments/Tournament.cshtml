@@ -77,7 +77,7 @@
     {
         <h3>Tävlingar</h3>
         <div class="list-group">
-            @foreach (var comp in Model.Competitions)
+            @foreach (var comp in Model.Competitions.Where(c => c.Date.Year == DateTime.Now.Year))
             {
                  <a class="list-group-item" href="/Tournaments/Tournament/@comp.Id">@string.Format("{0} {1}", DGTMVC4.Helpers.FormatHelper.GetDayMonth(comp.Date), comp.Name)</a>
             }
