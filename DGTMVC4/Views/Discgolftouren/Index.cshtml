@@ -7,7 +7,7 @@
     <div class="col-md-4">
         <h3>Om</h3>
         <p>
-            Discgolftouren startas år 2015 och är en serie endagarstävlingar som spelas i Stockholm med omnejd&nbsp;&nbsp;
+            Discgolftouren startades år 2015 och är en serie endagarstävlingar som spelas i Stockholm med omnejd&nbsp;&nbsp;
         </p>
         <p>
             Discgolftouren arrangeras i sammarbete med de klubbar som är knutna till spelpatserna
@@ -24,7 +24,7 @@
             Deltagare på DGT måste ha ett aktivt PDGA-medlemskap där man har som lägst 930 i rating.
         </p>
         <p>
-            Svenska spelare skall ha löst svensk licens för 2015.
+            Svenska spelare skall ha löst svensk licens för innevarande år.
         </p>
         <p>
             Om du har deltagit i en tävling på DGT 2015 och därefter sjunker i rating under 930
@@ -50,6 +50,10 @@
                 <tr>
                     <td>Anmälningsavgift</td>
                     <td>200 kr</td>
+                </tr>
+                <tr>
+                    <td>Greenfee</td>
+                    <td>dagkort på banan</td>
                 </tr>
                 <tr>
                     <td>Registrering</td>
@@ -89,7 +93,7 @@
     <div class="col-md-3">
         <h3>Tävlingar</h3>
         <div class="list-group">
-            @foreach (var comp in Model.Competitions.Where(c => c.Date.Year == DateTime.Now.Year))
+            @foreach (var comp in Model.Competitions)
             {
                 <a class="list-group-item" href="/Tournaments/Tournament/@comp.Id">@string.Format("{0} {1}", DGTMVC4.Helpers.FormatHelper.GetDayMonth(comp.Date), comp.Name)</a>
             }
