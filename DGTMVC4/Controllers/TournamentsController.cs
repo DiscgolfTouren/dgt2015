@@ -13,17 +13,21 @@ namespace DGTMVC4.Controllers
 {
     public class TournamentsController : Controller
     {
-        public ActionResult Tournament(int id = -1)
+        public ActionResult Tournament(CompetitionsViewModel vm, int id = -1)
         {
-            var vm = new CompetitionsViewModel();
+            vm.YearsList = new List<SelectListItem>();
 
-            if(id != -1)
+            AddYear(vm.YearsList, "2015", vm.SelectedYear);
+            AddYear(vm.YearsList, "2016", vm.SelectedYear);
+
+
+            if (id != -1)
             {
                 // hämta data för tävling
-                using(var session = NHibernateFactory.OpenSession())
+                using (var session = NHibernateFactory.OpenSession())
                 {
                     var competition = session.Get<Competition>(id);
-                    if(competition != null)
+                    if (competition != null)
                     {
                         vm.Competition = new CompetitionDTO()
                         {
@@ -74,7 +78,7 @@ namespace DGTMVC4.Controllers
                 var competitions = new List<Competition>();
                 using (var session = NHibernateFactory.OpenSession())
                 {
-                    competitions = session.Query<Competition>().Where(c => c.Date.Year == DateTime.Now.Year).OrderBy(c => c.Date).ToList();
+                    competitions = session.Query<Competition>().Where(c => c.Date.Year == int.Parse(vm.SelectedYear)).OrderBy(c => c.Date).ToList();
                 }
 
                 foreach (var competition in competitions)
@@ -90,6 +94,11 @@ namespace DGTMVC4.Controllers
             }
 
             return View(vm);
+        }
+
+        private void AddYear(List<SelectListItem> list, string year, string selectedYear)
+        {
+            list.Add(new SelectListItem { Text = year, Value = year, Selected = (year==selectedYear) });
         }
 
         public ActionResult Registration(RegistrationViewModel vm, string registreraAnmalan, string kontrolleraPDGA)
@@ -155,7 +164,7 @@ namespace DGTMVC4.Controllers
             {
                 // registrera anmälan
 
-                if(registreraAnmalan.Contains("1"))
+                if (registreraAnmalan.Contains("1"))
                 {
                     vm.TavlingsId = vm.Competitions[0].CompetitionId;
                 }
@@ -359,11 +368,11 @@ namespace DGTMVC4.Controllers
                     var player = HamtaPlayer(vm.SpelareId);
                     var competition = HamtaCompetition(vm.TavlingsId);
 
-                    if(player != null && competition != null)
+                    if (player != null && competition != null)
                     {
                         PlayerStatus playerStatus;
                         var playerStatuses = session.QueryOver<PlayerStatus>().Where(ps => ps.Player.Id == player.Id && ps.Competition.Id == competition.Id).List<PlayerStatus>();
-                        if(playerStatuses.Count > 0)
+                        if (playerStatuses.Count > 0)
                         {
                             playerStatus = playerStatuses[0];
                         }
