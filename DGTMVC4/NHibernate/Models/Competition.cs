@@ -14,8 +14,9 @@ namespace DGTMVC4.NHibernate.Models
         public virtual IList<Round> Rounds { get; set; }
         public virtual string PdgaWebPage { get; set; }
         public virtual string Description { get; set; }
-
         public virtual Tour Tour { get; set; }
+        public virtual DateTime RegistrationOpens { get; set; }
+        public virtual int Greenfee { get; set; }
 
         public Competition()
         {

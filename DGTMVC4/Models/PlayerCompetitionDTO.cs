@@ -12,6 +12,8 @@ namespace DGTMVC4.Models
         public int CompetitionId { get; set; }
         public string CompetitionName { get; set; }
         public DateTime CompetitionDate { get; set; }
+        public int Greenfee { get; set; }
+        public DateTime RegistrationOpens { get; set; }
         public PlayerCompetitionStatus? PlayerStatus { get; set; }
     }
 }

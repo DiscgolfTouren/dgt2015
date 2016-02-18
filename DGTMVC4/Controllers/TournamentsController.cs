@@ -209,7 +209,9 @@ namespace DGTMVC4.Controllers
                 {
                     CompetitionId = competition.Id,
                     CompetitionName = competition.Name,
-                    CompetitionDate = competition.Date
+                    CompetitionDate = competition.Date,
+                    Greenfee = competition.Greenfee,
+                    RegistrationOpens = competition.RegistrationOpens
                 };
                 var player = competition.Players.Where(p => p.Player.Id == spelareId).ToList<PlayerStatus>();
                 if (player.Count() > 0)

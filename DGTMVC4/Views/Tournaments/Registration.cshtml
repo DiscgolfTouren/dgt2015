@@ -89,6 +89,9 @@
                             Tävling
                         </th>
                         <th>
+                            Greenfee
+                        </th>
+                        <th>
                             Status
                         </th>
                     </tr>
@@ -99,6 +102,7 @@
                     @Html.HiddenFor(m => m.Competitions[i].CompetitionId)
                     @Html.HiddenFor(m => m.Competitions[i].CompetitionDate)
                     @Html.HiddenFor(m => m.Competitions[i].CompetitionName)
+                    @Html.HiddenFor(m => m.Competitions[i].Greenfee)
                     @Html.HiddenFor(m => m.Competitions[i].PlayerStatus)
                     <tr>
                         <td>
@@ -107,6 +111,12 @@
                         </td>
                         <td>
                             @Html.Label(string.Format("DGT {0} {1}", i + 1, Model.Competitions[i].CompetitionName))
+                        </td>
+                        <td>
+                            @if(Model.Competitions[i].Greenfee != 0)
+                            {
+                                @Html.Label(Model.Competitions[i].Greenfee.ToString())
+                            }
                         </td>
                         <td>
                             @if (Model.Competitions[i].CompetitionDate < DateTime.Now)
@@ -125,13 +135,15 @@
                             {
                                 @Html.Label("Anmäld, betalning saknas")
                             }
-                            else if (Model.Competitions[i].CompetitionDate.AddDays(-60) < DateTime.Now && Model.Competitions[i].PlayerStatus == null)
+                            else if (((Model.Competitions[i].RegistrationOpens.Year != DateTime.Now.Year && Model.Competitions[i].CompetitionDate.AddDays(-60) < DateTime.Now) ||
+                                      (Model.Competitions[i].RegistrationOpens <= new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 0, 0, 1))) &&
+                                      Model.Competitions[i].PlayerStatus == null)
                             {
                                 <input type="submit" name="RegistreraAnmalan" value="Registrera anmälan för DGT @((i + 1).ToString()) " />
                             }
-                            else if (Model.Competitions[i].CompetitionDate.AddDays(-60) >= DateTime.Now)
+                            else if (Model.Competitions[i].RegistrationOpens >= DateTime.Now)
                             {
-                                @Html.Label(string.Format("Anmälan öppnas {0}", DGTMVC4.Helpers.FormatHelper.GetDayMonth(Model.Competitions[i].CompetitionDate.AddDays(-60))));
+                                @Html.Label(string.Format("Anmälan öppnas {0}", DGTMVC4.Helpers.FormatHelper.GetDayMonth(Model.Competitions[i].RegistrationOpens)));
                             }
                         </td>
                     </tr>
