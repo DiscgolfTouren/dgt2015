@@ -29,7 +29,7 @@
     <div class="col-md-6">
         <h3>Steg 3 - betalning</h3>
         <p>
-            Betala anmälningsavgiften på 200 kr på något av följande sätt
+            Betala anmälningsavgiften på 200 kr och eventuell greenfee på något av följande sätt
             <ul>
                 <li>Nordea konto 3160-4537167 (Betalningsmottagare: Daniel Skymberg)</li>
                 <li>Swish till +46735158924 (Daniel Skymberg)</li>
@@ -89,7 +89,7 @@
                             Tävling
                         </th>
                         <th>
-                            Greenfee
+                            Avgift (+ Greenfee)
                         </th>
                         <th>
                             Status
@@ -113,10 +113,7 @@
                             @Html.Label(string.Format("DGT {0} {1}", i + 1, Model.Competitions[i].CompetitionName))
                         </td>
                         <td>
-                            @if(Model.Competitions[i].Greenfee != 0)
-                            {
-                                @Html.Label(Model.Competitions[i].Greenfee.ToString())
-                            }
+                            @Html.Label((200 + Model.Competitions[i].Greenfee).ToString())
                         </td>
                         <td>
                             @if (Model.Competitions[i].CompetitionDate < DateTime.Now)
