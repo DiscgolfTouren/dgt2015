@@ -79,6 +79,7 @@
         using (Html.BeginForm())
         {
             @Html.DropDownList("SelectedYear", Model.YearsList);
+            @Html.Raw("&nbsp;");
             <input type="submit" name="hamtaListan" value="Hämta tävlingar för valt år" />
         }
         <div class="list-group">
