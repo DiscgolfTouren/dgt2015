@@ -116,18 +116,27 @@ namespace DGTMVC4.Controllers
                         var player = HamtaPlayer(vm.PDGANummer);
                         if (player != null)
                         {
-                            vm.SpelareOk = true;
                             vm.SpelareId = player.Id;
                             vm.Fornamn = player.FirstName;
                             vm.Efternamn = player.LastName;
+
                             if(player.RatingDate.Year != DateTime.Now.Year)
                             {
                                 PDGASaker.PDGAPlayer pdgaPlayer = PDGASaker.PDGARESTApi.GetMemberInfo(vm.PDGANummer, WebConfigurationManager.AppSettings["PDGAUsername"], WebConfigurationManager.AppSettings["PDGAPassword"]);
                                 if(pdgaPlayer != null && pdgaPlayer.pdga_number != null && pdgaPlayer.membership_status == "current")
                                 {
                                     UpdateRating(vm.PDGANummer, pdgaPlayer.rating, DateTime.Now);
+                                    player.Rating = pdgaPlayer.rating;
                                 }
                             }
+
+                            int playerRating = 0;
+                            int.TryParse(player.Rating, out playerRating);
+                            if(playerRating >= 930)
+                            {
+                                vm.SpelareOk = true;
+                            }
+
                         }
                         else // om inte i systemet kontrollera med PDGA
                         {
