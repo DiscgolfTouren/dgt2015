@@ -89,7 +89,7 @@
                             Tävling
                         </th>
                         <th>
-                            Avgift (+ Greenfee)
+                            Avgift + Greenfee
                         </th>
                         <th>
                             Status
@@ -113,7 +113,14 @@
                             @Html.Label(string.Format("DGT {0} {1}", i + 1, Model.Competitions[i].CompetitionName))
                         </td>
                         <td>
-                            @Html.Label((200 + Model.Competitions[i].Greenfee).ToString())
+                            @if (Model.Competitions[i].Greenfee != null && Model.Competitions[i].Greenfee != 0)
+                            {
+                                @Html.Label(string.Format("{0} (200*)", (200 + Model.Competitions[i].Greenfee).ToString()));
+                            }
+                            else
+                            {
+                                @Html.Label("200");
+                            }
                         </td>
                         <td>
                             @if (Model.Competitions[i].CompetitionDate < DateTime.Now)
@@ -145,8 +152,9 @@
                         </td>
                     </tr>
                 }
-
             </table>
+            <br />
+            @Html.Label("* för dig som har årskort på Järva är summan 200");
         }
     }
 </div>
