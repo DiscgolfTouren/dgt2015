@@ -132,7 +132,7 @@ namespace DGTMVC4.Controllers
 
                             int playerRating = 0;
                             int.TryParse(player.Rating, out playerRating);
-                            if(playerRating >= 930)
+                            if(playerRating >= 920)
                             {
                                 vm.SpelareOk = true;
                             }
@@ -143,7 +143,7 @@ namespace DGTMVC4.Controllers
                             PDGASaker.PDGAPlayer pdgaPlayer = PDGASaker.PDGARESTApi.GetMemberInfo(vm.PDGANummer, WebConfigurationManager.AppSettings["PDGAUsername"], WebConfigurationManager.AppSettings["PDGAPassword"]);
                             int playerRating = 0;
                             int.TryParse(pdgaPlayer.rating, out playerRating);
-                            if (pdgaPlayer != null && pdgaPlayer.pdga_number != null && pdgaPlayer.membership_status == "current" && playerRating >= 930)
+                            if (pdgaPlayer != null && pdgaPlayer.pdga_number != null && pdgaPlayer.membership_status == "current" && playerRating >= 920)
                             {
                                 vm.SpelareOk = true;
                                 vm.Fornamn = pdgaPlayer.first_name;
@@ -160,9 +160,9 @@ namespace DGTMVC4.Controllers
                             }
                             else
                             {
-                                if (playerRating < 930 && pdgaPlayer.membership_status == "current")
+                                if (playerRating < 920 && pdgaPlayer.membership_status == "current")
                                 {
-                                    vm.Meddelande = "Din rating måste vara 930 eller högre";
+                                    vm.Meddelande = "Din rating måste vara 920 eller högre";
                                 }
                                 else
                                 {
