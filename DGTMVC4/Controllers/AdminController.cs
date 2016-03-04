@@ -236,7 +236,6 @@ namespace DGTMVC4.Controllers
             }
         }
 
-
         private double CalculatePoints(int numberOfPlayers, int place, int samePlace)
         {
             double points = 0.0;
@@ -377,8 +376,6 @@ namespace DGTMVC4.Controllers
                 session.Flush();
             }
         }
-
-
 
         private List<AdminResult> TolkaInput(string input)
         {
