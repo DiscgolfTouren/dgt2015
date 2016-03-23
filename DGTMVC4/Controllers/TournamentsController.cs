@@ -132,7 +132,7 @@ namespace DGTMVC4.Controllers
 
                             int playerRating = 0;
                             int.TryParse(player.Rating, out playerRating);
-                            if(playerRating >= 920)
+                            if(playerRating >= 920 || (player.WildCardYear != null && player.WildCardYear == DateTime.Now.Year))
                             {
                                 vm.SpelareOk = true;
                             }

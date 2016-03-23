@@ -15,6 +15,7 @@ namespace DGTMVC4.NHibernate.Mappings
              Map(p => p.PdgaNumber);
              Map(p => p.Rating);
              Map(p => p.RatingDate);
+             Map(p => p.WildCardYear);
          }
     }
 }

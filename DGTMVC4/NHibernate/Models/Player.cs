@@ -12,5 +12,6 @@ namespace DGTMVC4.NHibernate.Models
         public virtual string Phone { get; set; }
         public virtual string Rating { get; set; }
         public virtual DateTime RatingDate { get; set; }
+        public virtual int? WildCardYear { get; set; }
     }
 }
