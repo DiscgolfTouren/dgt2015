@@ -263,11 +263,15 @@
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <None Include="Properties\PublishProfiles\DGTMVC4.pubxml" />
     <Content Include="Resources\bankarta_2015_visattra.jpg" />
+    <Content Include="Resources\DiscGolfPark_logo_300pix.jpg" />
+    <Content Include="Resources\DiscGolfPark_logo_600pix.jpg" />
     <Content Include="Resources\footway.PNG" />
     <Content Include="Resources\footwayoutlet.PNG" />
+    <Content Include="Resources\Innovalogo400x160.jpg" />
     <Content Include="Resources\kastaplast.jpg" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
     <Content Include="Resources\CaddyBook_Ultuna_2014.pdf" />
+    <Content Include="Resources\Innova_logo_2014.pdf" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
