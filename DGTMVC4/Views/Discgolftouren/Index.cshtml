@@ -1,7 +1,15 @@
 ﻿@model DGTMVC4.Models.CompetitionsViewModel
 
-<div class="jumbotron">
-    <h1>Discgolftouren</h1>
+<div class="row">
+    <div class="col-md-4">
+        <h1 style="font-weight: bold; font-family: Tahoma; font-size: 45px">Discgolftouren</h1>
+    </div>
+    <div class="col-md-5">
+        <center><a href="http://www.innovastore.net/?currency=SEK" target="_blank"><img src="~/Resources/Innovalogo400x160.jpg" width="220" height="88" style="margin-top: 20px" /></a></center>
+    </div>
+    <div class="col-md-3">
+        <a href="http://www.discgolfpark.net/sv/hem/" target="_blank"><img src="~/Resources/DiscGolfPark_logo_300pix.jpg" style="margin-top: 10px" /></a> 
+    </div>
 </div>
 <div class="row">
     <div class="col-md-4">
@@ -100,38 +108,38 @@
         </div>
 
         <h3>Sponsorer</h3>
-        <div id="myCarousel" class="carousel slide" data-ride="carousel" style="height: 100px; ">
+        <div id="myCarousel" class="carousel slide" data-ride="carousel" style="height: 60px; ">
             <!-- Indicators -->
             @*<ol class="carousel-indicators">
-                <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-                <li data-target="#myCarousel" data-slide-to="1"></li>
-                <li data-target="#myCarousel" data-slide-to="2"></li>
-            </ol>*@
+                    <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                    <li data-target="#myCarousel" data-slide-to="1"></li>
+                    <li data-target="#myCarousel" data-slide-to="2"></li>
+                </ol>*@
 
             <!-- Wrapper for slides -->
             <div class="carousel-inner" role="listbox">
                 <div class="item active">
-                    <a href="http://www.footway.se" target="_blank"><img src="~/Resources/footway.png" alt="Chania" style="display: block; margin-left: auto; margin-right: auto; height: 100px; width: 150px" /></a>
+                    <a href="http://www.footway.se" target="_blank"><img src="~/Resources/footway.png" alt="Chania" style="display: block; margin-left: auto; margin-right: auto; height: 60px; width: 150px" /></a>
                 </div>
 
                 <div class="item">
-                    <a href="http://www.kastaplast.se/" target="_blank"><img src="~/Resources/kastaplast.jpg" alt="Flower" style="display: block; margin-left: auto; margin-right: auto; height: 100px; width: 100px; " /></a>
+                    <a href="http://www.kastaplast.se/" target="_blank"><img src="~/Resources/kastaplast.jpg" alt="Flower" style="display: block; margin-left: auto; margin-right: auto; height: 60px; width: 60px; " /></a>
                 </div>
 
                 <div class="item">
-                    <a href="http://www.footway.se/outlet" target="_blank"><img src="~/Resources/footwayoutlet.png" alt="Chania" style="display: block; margin-left: auto; margin-right: auto; height: 100px; width: 150px; " /></a>
-</div>
+                    <a href="http://www.footway.se/outlet" target="_blank"><img src="~/Resources/footwayoutlet.png" alt="Chania" style="display: block; margin-left: auto; margin-right: auto; height: 60px; width: 150px; " /></a>
+                </div>
 
 
             </div>
 
             <!-- Left and right controls -->
             <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
-                <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+@*                <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>*@
                 <span class="sr-only">Previous</span>
             </a>
             <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
-                <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+  @*              <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>*@
                 <span class="sr-only">Next</span>
             </a>
         </div>
