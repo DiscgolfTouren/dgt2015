@@ -269,6 +269,8 @@
     <Content Include="Resources\footwayoutlet.PNG" />
     <Content Include="Resources\Innovalogo400x160.jpg" />
     <Content Include="Resources\kastaplast.jpg" />
+    <Content Include="Resources\prodigy.png" />
+    <Content Include="Resources\prodigy2.png" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
     <Content Include="Resources\CaddyBook_Ultuna_2014.pdf" />
     <Content Include="Resources\Innova_logo_2014.pdf" />
