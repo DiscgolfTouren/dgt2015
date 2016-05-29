@@ -89,7 +89,7 @@ namespace DGTMVC4.Controllers
         {
             int year = DateTime.Now.Year;
 
-            DeleteStandings(year);
+            DeleteStandings();
 
             using (var session = NHibernateFactory.OpenSession())
             {
@@ -115,7 +115,7 @@ namespace DGTMVC4.Controllers
                 var standings = session.Query<Standing>();
                 foreach (var result in results)
                 {
-                    var standing = standings.FirstOrDefault(s => s.Player == result.Player);
+                    var standing = standings.FirstOrDefault(s => s.Player == result.Player && s.Year == year);
                     if (standing == null)
                     {
                         // new
@@ -151,7 +151,7 @@ namespace DGTMVC4.Controllers
 
                 int i = 0;
                 int index = 0;
-                double points = 501.0;
+                double points = 401.0;
                 foreach(var standing in standingsAddPlace)
                 {
                     i++;
@@ -369,6 +369,20 @@ namespace DGTMVC4.Controllers
             using (var session = NHibernateFactory.OpenSession())
             {
                 var standings = session.QueryOver<Standing>().Where(s => s.Year == year).List<Standing>();
+                foreach (var s in standings)
+                {
+                    session.Delete(s);
+                }
+
+                session.Flush();
+            }
+        }
+
+        private void DeleteStandings()
+        {
+            using (var session = NHibernateFactory.OpenSession())
+            {
+                var standings = session.QueryOver<Standing>().List<Standing>();
                 foreach (var s in standings)
                 {
                     session.Delete(s);

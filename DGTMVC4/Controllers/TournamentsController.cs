@@ -257,7 +257,7 @@ namespace DGTMVC4.Controllers
             var standings = new List<Standing>();
             using (var session = NHibernateFactory.OpenSession())
             {
-                standings = session.Query<Standing>().ToList();
+                standings = session.Query<Standing>().Where(s => s.Year == DateTime.Now.Year).ToList();
             }
 
             foreach (var standing in standings)
